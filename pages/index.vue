@@ -46,6 +46,20 @@
 <template>
   <NuxtLayout>
     <section class="section">
+      <div class="columns is-centered is-mobile">
+        <div class="column is-narrow">
+          <h1 class="title is-1">KYC Free Bitcoin Price</h1>
+          <div class="subtitle has-text-centered">
+            <span class="icon">
+              <i class="mdi mdi-github"></i>
+            </span>
+            <NuxtLink
+              href="https://github.com/learntheropes/kyc-free-bitcoin-price"
+              target="_blank"
+            >kyc-free-bitcoin-price</NuxtLink>
+          </div>
+        </div>
+      </div>
       <div class="columns is-centered">
         <div class="column is-narrow">
           <div 
