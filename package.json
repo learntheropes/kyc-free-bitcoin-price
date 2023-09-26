@@ -1,0 +1,25 @@
+{
+  "name": "kyc-free-bitcoin-price",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate",
+    "start": "nuxi start"
+  },
+  "author": "Learntheropes",
+  "license": "MIT",
+  "devDependencies": {
+    "@mdi/font": "^7.2.96",
+    "bulma": "^0.9.4",
+    "nuxt": "^3.7.4",
+    "sass": "^1.68.0"
+  },
+  "dependencies": {
+    "lodash.groupby": "^4.6.0",
+    "lodash.minby": "^4.6.0",
+    "lodash.sortby": "^4.7.0"
+  }
+}

@@ -1,0 +1,14 @@
+$custom: rgb(247, 147, 26) !default; // 68, 164, 49 btcpay server default color
+$primary: $custom;
+$link: $custom;
+$danger: $custom;
+$info: white;
+$warning: grey;
+$success: black;
+
+@import "../node_modules/bulma/sass/layout/section.sass";
+@import "../node_modules/bulma/sass/elements/container.sass";
+@import "../node_modules/bulma/sass/grid/columns.sass";
+@import "../node_modules/bulma/sass/helpers/color.sass";
+
+
