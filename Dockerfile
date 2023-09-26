@@ -28,3 +28,7 @@ EXPOSE 8080
 
 # Start command
 CMD [ "node", ".output/server/index.mjs" ]
+
+# Run Tor as daemon
+RUN cd ..
+RUN /usr/bin/tor --RunAsDaemon 1
