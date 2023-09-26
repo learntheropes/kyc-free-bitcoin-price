@@ -48,7 +48,7 @@ export default defineEventHandler(async event => {
       }
     ]
   } catch (error) {
-    console.log('error', error);
+    console.log('bity api error', error);
     return [];
   }
 });

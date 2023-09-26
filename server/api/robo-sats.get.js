@@ -41,7 +41,7 @@ const fetchRoboSats = () => {
         resolve(response);
       }
       else {
-        console.log('error', error)
+        console.log('robosats api error', error)
         reject([])
       }
     });

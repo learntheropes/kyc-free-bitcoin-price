@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <div class="section columns is-centered">
+      <div class="section columns is-centered is-mobile">
         <div class="column is-narrow">
           <div 
             v-for="(offer, index) of offers" 
@@ -163,7 +163,7 @@
           </div>
         </div>
       </div>
-      <div class="columns is-centered">
+      <div class="columns is-centered is-mobile">
         <div class="column is-narrow">
           <span class="icon is-small">
             <i class="mdi mdi-bitcoin"></i>
