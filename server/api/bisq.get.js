@@ -13,13 +13,13 @@ export default defineEventHandler(async event => {
   const methods = groupBy(sells, 'payment_method');
 
   return Object.keys(methods).reduce((arr, method) => {
-    const offer = parseFloat(minBy(methods[method], 'price').price).toFixed(2)
-    const fee = (parseFloat(minBy(methods[method], 'price').price) * 1.15 / 100).toFixed(2)
+    const offer = parseFloat(minBy(methods[method], 'price').price).toFixed(2);
+    const fee = (parseFloat(minBy(methods[method], 'price').price) * 1.15 / 100).toFixed(2);
 
     arr.push({
       service: 'Bisq',
       site: 'https://bisq.network/',
-      method,
+      method: capitalize(method.split('_').join(' ')),
       price: parseFloat(offer + fee).toFixed(2)
     });
 
