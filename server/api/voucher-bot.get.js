@@ -21,14 +21,14 @@ export default defineEventHandler(async event => {
       {
         service: 'VoucherBot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
-        features: ['lightning'],
+        features: ['on-chain', 'lightning'],
         method: 'Sepa Instant',
         price
       },
       {
         service: 'VoucherBot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
-        features: ['lightning'],
+        features: ['on-chain', 'lightning'],
         method: 'Sepa',
         price
       },
