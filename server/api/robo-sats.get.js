@@ -17,12 +17,17 @@ const fetchRoboSats = () => {
           const offer = parseFloat(minBy(methods[method], 'price').price).toFixed(2);
           const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100).toFixed(2);
       
-          arr.push({
-            service: 'RoboSats',
-            url: 'https://unsafe.robosats.com/',
-            method,
-            price: parseFloat(offer + fee).toFixed(2)
-          });
+          method
+            .split(' ')
+            .filter(m => m !== '&' && m !== 'Friends' && m !== 'Family' && m !== 'Monero' && m !== 'USDT' && m !== 'L-USDt')
+            .forEach(normilizedMethod => {
+              arr.push({
+                service: 'RoboSats',
+                url: 'https://unsafe.robosats.com/',
+                method: capitalize(normilizedMethod).replace('Instant', 'Sepa Instant'),
+                price: parseFloat(offer + fee).toFixed(2)
+              });
+            })
           
           return arr;
         }, []);
