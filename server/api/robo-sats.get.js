@@ -24,7 +24,7 @@ const fetchRoboSats = () => {
       
           method
             .split(' ')
-            .filter(m => m !== '&' && m !== 'Friends' && m !== 'Family' && m !== 'Monero' && m !== 'USDT' && m !== 'L-USDt')
+            .filter(m => m !== '&' && m !== 'Friends' && m !== 'Family' && m !== 'Monero' && m !== 'USDT' && m !== 'L-USDt' && m !== 'IT' && m !== 'it' && m !== 'It')
             .forEach(normilizedMethod => {
               arr.push({
                 service: 'RoboSats',

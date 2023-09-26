@@ -4,64 +4,52 @@
   const title = 'KYC Free Bitcoin Price'
 
   useHead({
-  title: title,
-  meta: [
-    {
-      name: 'description',
-      content: 'Comparison website to purchase KYC free bitcoins at the cheapes price available on the free market.'
-    },
-  ],
-});
+    title: title,
+    meta: [
+      {
+        name: 'description',
+        content: 'Comparison website to purchase KYC free bitcoins at the cheapes price available on the free market.'
+      },
+    ],
+  });
 
-  const bityFetch = useFetch('/api/bity');
-  const bisqFetch = useFetch('/api/bisq');
-  const hodlHodlFetch = useFetch('/api/hodl-hodl');
-  const roboSatsFetch = useFetch('/api/robo-sats');
-  const voucherBotFetch = useFetch('/api/voucher-bot')
+  let offers = ref([]);
 
-  const promises = [
-    bityFetch, 
-    bisqFetch,
-    hodlHodlFetch,
-    roboSatsFetch,
-    voucherBotFetch
-  ];
+  onMounted(async () => {
 
-  const [
-    { 
-      data: { 
-        value: bity 
-      }
-    },
-    {
-      data: { 
-        value: bisq 
-      }
-    },
-    {
-      data: { 
-        value: hodlHodl 
-      }
-    },
-    {
-      data: { 
-        value: roboSats 
-      }
-    },
-    {
-      data: { 
-        value: voucherBot 
-      }
-    }
-  ] = await Promise.all(promises);
+    const bityFetch = $fetch('/api/bity');
+    const bisqFetch = $fetch('/api/bisq');
+    const hodlHodlFetch = $fetch('/api/hodl-hodl');
+    const roboSatsFetch = $fetch('/api/robo-sats');
+    const voucherBotFetch = $fetch('/api/voucher-bot');
 
-  const offers = sortBy([
-    ...bity,
-    ...bisq,
-    ...hodlHodl,
-    ...roboSats,
-    ...voucherBot
-  ], 'price');
+    const promises = [
+      bityFetch, 
+      bisqFetch,
+      hodlHodlFetch,
+      roboSatsFetch,
+      voucherBotFetch
+    ];
+
+    const [
+      bity,
+      bisq,
+      hodlHodl,
+      roboSats,
+      voucherBot
+    ] = await Promise.all(promises);
+
+    offers.value = sortBy([
+      ...bity,
+      ...bisq,
+      ...hodlHodl,
+      ...roboSats,
+      ...voucherBot
+    ], 'price');
+
+    const { $event } = useNuxtApp();
+    $event('isLoading', false);
+  });
 </script>
 <template>
   <NuxtLayout>
@@ -76,7 +64,7 @@
             <NuxtLink
               href="https://github.com/learntheropes/kyc-free-bitcoin-price"
               target="_blank"
-            >kyc-free-bitcoin-price</NuxtLink>
+            >learntheropes/kyc-free-bitcoin-price</NuxtLink>
           </div>
         </div>
       </div>
@@ -175,26 +163,6 @@
             <span class="has-text-primary">{{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }}</span>
             <span>%</span>
           </div>
-        </div>
-      </div>
-      <div class="columns is-centered is-mobile">
-        <div class="column is-narrow">
-          <span class="icon is-small">
-            <i class="mdi mdi-bitcoin"></i>
-          </span>
-          <span>On-chain</span>
-        </div>
-        <div class="column is-narrow">
-          <span class="icon is-small">
-            <i class="mdi mdi-lightning-bolt"></i>
-          </span>
-          <span>Lightning Network</span>
-        </div>
-        <div class="column is-narrow">
-          <span class="icon is-small">
-            <i class="mdi mdi-account-multiple"></i>
-          </span>
-          <span>Peer to Peer</span>
         </div>
       </div>
     </section>

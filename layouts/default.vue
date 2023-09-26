@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <Html>
@@ -8,6 +9,8 @@
               <slot />
             </div>
           </main>
+          <LoadingOffers />
+          <LayoutFooter />
         </div>
       </Body>
     </Html>

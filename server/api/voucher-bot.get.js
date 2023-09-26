@@ -34,8 +34,8 @@ export default defineEventHandler(async event => {
       },
       {
         service: 'VoucherBot',
-        url: 'https://t.me/BitcoinVoucherBot',
-        features: ['lightning'],
+        url: 'https://t.me/BitcoinVoucherBot?start=345173833',
+        features: ['on-chain', 'lightning'],
         method: 'Voucher',
         price: parseFloat(price * 1.05).toFixed(2)
       }

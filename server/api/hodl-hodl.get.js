@@ -16,7 +16,7 @@ export default defineEventHandler(async event => {
         .reduce((arr, method) => {
           arr.push({
             service: 'HodlHodl',
-            url: 'https://hodlhodl.com',
+            url: 'https://hodlhodl.com/join/HCJ6',
             features: ['on-chain', 'p2p'],
             method: capitalize(method.payment_method_name).replace('(eu)', '').replace('Sepa Bank Transfer', 'Sepa'),
             price: parseFloat(parseFloat(offer.price) * (1 + parseFloat(offer.fee.author_fee_rate) + parseFloat(offer.fee.intermediary_fee_rate))).toFixed(2)

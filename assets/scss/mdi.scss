@@ -38,6 +38,11 @@
   content: "\F000E";
 }
 
+.mdi-loading::before {
+  content: "\F0772";
+}
+
+
 .mdi-18px.mdi-set, .mdi-18px.mdi:before {
   font-size: 18px;
 }
