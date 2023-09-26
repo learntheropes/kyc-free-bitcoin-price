@@ -150,7 +150,7 @@
             <span class="has-text-primary has-text-weight-bold">{{ offer.price }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
             <span>&nbsp;</span>
             <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span>
-            <div class="has-text-primary is-hidden-tablet">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</div>
+            <div class="has-text-primary is-hidden-tablet has-text-right">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</div>
           </div>
         </div>
         <div class="column is-narrow is-hidden-mobile">
