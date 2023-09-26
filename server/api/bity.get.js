@@ -35,11 +35,13 @@ export default defineEventHandler(async event => {
     {
       service: 'Bity',
       url: 'https://bity.com/',
+      features: ['on-chain'],
       method: 'Sepa Instant',
       price
     },
     {
       service: 'Bity',
+      features: ['on-chain'],
       method: 'Sepa',
       price
     }

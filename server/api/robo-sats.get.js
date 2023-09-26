@@ -29,6 +29,7 @@ const fetchRoboSats = () => {
               arr.push({
                 service: 'RoboSats',
                 url: 'https://unsafe.robosats.com/',
+                features: ['lightning', 'p2p'],
                 method: capitalize(normilizedMethod).replace('Instant', 'Sepa Instant'),
                 price: parseFloat(offer + fee).toFixed(2)
               });

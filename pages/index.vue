@@ -90,6 +90,32 @@
             v-for="(offer, index) of offers" 
             :key="index"
             class="block"
+          >
+            <span 
+              v-if="offer.features.includes('on-chain')" 
+              class="icon is-small"
+            >
+              <i class="mdi mdi-bitcoin"></i>
+            </span>
+            <span 
+              v-if="offer.features.includes('lightning')" 
+              class="icon is-small"
+            >
+              <i class="mdi mdi-lightning-bolt"></i>
+            </span>
+            <span 
+              v-if="offer.features.includes('p2p')" 
+              class="icon is-small"
+            >
+              <i class="mdi mdi-account-multiple"></i>
+            </span>
+          </div>
+        </div>
+        <div class="column is-narrow">
+          <div 
+            v-for="(offer, index) of offers" 
+            :key="index"
+            class="block"
           >{{ offer.method }}</div>
         </div>
         <div class="column is-narrow">
@@ -109,8 +135,7 @@
             :key="index"
             class="block has-text-right"
           >
-            <span v-if="index === 0">&nbsp;</span>
-            <span v-else class="has-text-primary">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</span>
+            <span class="has-text-primary">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</span>
           </div>
         </div>
       </div>

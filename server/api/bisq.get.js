@@ -19,6 +19,7 @@ export default defineEventHandler(async event => {
     arr.push({
       service: 'Bisq',
       site: 'https://bisq.network/',
+      features: ['on-chain', 'p2p'],
       method: capitalize(method.split('_').join(' ')),
       price: parseFloat(offer + fee).toFixed(2)
     });

@@ -9,7 +9,7 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y tor
 
 # Run Tor as daemon
-RUN /usr/bin/tor --RunAsDaemon 1
+# RUN /usr/bin/tor --RunAsDaemon 1
 
 # Set the working directory to /app
 WORKDIR /app
@@ -28,7 +28,3 @@ EXPOSE 8080
 
 # Start command
 CMD [ "node", ".output/server/index.mjs" ]
-
-# Run Tor as daemon
-RUN cd ..
-RUN /usr/bin/tor --RunAsDaemon 1

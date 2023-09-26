@@ -26,6 +26,18 @@
   content: "\F02A4";
 }
 
+.mdi-bitcoin::before {
+  content: "\F0813";
+}
+
+.mdi-lightning-bolt::before {
+  content: "\F140B";
+}
+
+.mdi-account-multiple::before {
+  content: "\F000E";
+}
+
 .mdi-18px.mdi-set, .mdi-18px.mdi:before {
   font-size: 18px;
 }
