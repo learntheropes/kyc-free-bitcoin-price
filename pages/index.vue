@@ -1,6 +1,18 @@
 <script setup>
   import sortBy from 'lodash.sortby';
 
+  const title = 'KYC Free Bitcoin Price'
+
+  useHead({
+  title: title,
+  meta: [
+    {
+      name: 'description',
+      content: 'Comparison website to purchase KYC free bitcoins at the cheapes price available on the free market.'
+    },
+  ],
+});
+
   const bityFetch = useFetch('/api/bity');
   const bisqFetch = useFetch('/api/bisq');
   const hodlHodlFetch = useFetch('/api/hodl-hodl');
@@ -36,20 +48,20 @@
     }
   ] = await Promise.all(promises);
 
-  const offers = ref(sortBy([
+  const offers = sortBy([
     ...bity,
     ...bisq,
     ...hodlHodl,
     ...roboSats
-  ], 'price'));
+  ], 'price');
 </script>
 <template>
   <NuxtLayout>
     <section class="section">
       <div class="columns is-centered is-mobile">
         <div class="column is-narrow">
-          <h1 class="title is-1">KYC Free Bitcoin Price</h1>
-          <div class="subtitle has-text-centered">
+          <h1 class="title is-1">{{ title }}</h1>
+          <div class="subtitle is-6 has-text-centered">
             <span class="icon">
               <i class="mdi mdi-github"></i>
             </span>
