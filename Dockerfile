@@ -8,6 +8,9 @@ RUN apt-get update && apt-get upgrade -y
 # Install Tor
 RUN apt-get install -y tor
 
+# Run Tor as daemon
+RUN /usr/bin/tor --RunAsDaemon 1
+
 # Set the working directory to /app
 WORKDIR /app
 
