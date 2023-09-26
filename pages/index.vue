@@ -58,9 +58,9 @@
 <template>
   <NuxtLayout>
     <section class="section">
-      <div class="columns is-centered is-mobile">
+      <div class="columns is-centered">
         <div class="column is-narrow">
-          <h1 class="title is-1">{{ title }}</h1>
+          <h1 class="title is-1 has-text-centered">{{ title }}</h1>
           <div class="subtitle is-6 has-text-centered">
             <span class="icon">
               <i class="mdi mdi-github"></i>
@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <div class="columns is-centered">
+      <div class="columns is-mobile is-centered">
         <div class="column is-narrow">
           <div 
             v-for="(offer, index) of offers" 
@@ -85,7 +85,7 @@
             >{{ offer.service }}</NuxtLink>
           </div>
         </div>
-        <div class="column is-narrow">
+        <div class="column is-narrow is-hidden-mobile">
           <div 
             v-for="(offer, index) of offers" 
             :key="index"
@@ -116,7 +116,7 @@
             v-for="(offer, index) of offers" 
             :key="index"
             class="block"
-          >{{ offer.method }}</div>
+          >{{ offer.method.replace(/\(([^\)]+)\)/, '') }}</div>
         </div>
         <div class="column is-narrow">
           <div 
@@ -126,10 +126,10 @@
           >
             <span class="has-text-primary has-text-weight-bold">{{ offer.price }}</span> 
             <span>&nbsp;</span>
-            <span class="has-text-grey is-size-7">EUR/BTC</span> 
+            <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span> 
           </div>
         </div>
-        <div class="column is-narrow">
+        <div class="column is-narrow is-hidden-mobile">
           <div 
             v-for="(offer, index) of offers" 
             :key="index"
