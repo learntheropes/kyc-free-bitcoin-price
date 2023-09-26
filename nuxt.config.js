@@ -68,18 +68,18 @@ export default defineNuxtConfig({
     '~/assets/scss/custom.scss',
     '~/assets/scss/mdi.scss',
   ],
-  
+
   components: [{
     path: '~/components',
     pathPrefix: false,
     global: true
   }],
 
-  // modules: [
-  //   'nuxt-simple-robots',
-  //   'nuxt-simple-sitemap',
-  //   'nuxt-delay-hydration'
-  // ],
+  modules: [
+    // 'nuxt-simple-robots',
+    // 'nuxt-simple-sitemap',
+    'nuxt-delay-hydration'
+  ],
 
   // robots: {
   //   userAgents: ['*'],
@@ -93,9 +93,8 @@ export default defineNuxtConfig({
   //   sitemapName: `sitemap_index.xml`
   // },
 
-  // delayHydration: {
-  //   mode: 'init',
-  //   exclude: localeCodes.map(code => `/${code}/invoice/**`),
-  //   debug: process.env.NODE_ENV === 'development'
-  // },
+  delayHydration: {
+    mode: 'init',
+    debug: process.env.NODE_ENV === 'development'
+  },
 });
