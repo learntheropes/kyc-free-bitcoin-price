@@ -15,7 +15,7 @@ export default defineEventHandler(async event => {
         arr.push({
           service: 'Hodl Hodl',
           url: 'https://hodlhodl.com',
-          method: method.payment_method_name,
+          method: capitalize(method.payment_method_name).replace('(eu)', '').replace('Sepa Bank Transfer', 'Sepa'),
           price: parseFloat(parseFloat(offer.price) * (1 + parseFloat(offer.fee.author_fee_rate) + parseFloat(offer.fee.intermediary_fee_rate))).toFixed(2)
         })
         return arr;
