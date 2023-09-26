@@ -13,7 +13,7 @@ export default defineEventHandler(async event => {
       .filter(method => method.payment_method_type !== 'Cryptocurrency')
       .reduce((arr, method) => {
         arr.push({
-          service: 'Hodl Hodl',
+          service: 'HodlHodl',
           url: 'https://hodlhodl.com',
           features: ['on-chain', 'p2p'],
           method: capitalize(method.payment_method_name).replace('(eu)', '').replace('Sepa Bank Transfer', 'Sepa'),

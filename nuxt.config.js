@@ -19,6 +19,11 @@ export default defineNuxtConfig({
           content: "width=device-width, initial-scale=1"
         },
         {
+          id: 'lang',
+          name: 'lang',
+          content: 'en'
+        },
+        {
           id: 'og:type',
           name: 'og:type',
           content: 'website'
