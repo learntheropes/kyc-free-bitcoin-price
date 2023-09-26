@@ -4,11 +4,13 @@
   const bityFetch = useFetch('/api/bity');
   const bisqFetch = useFetch('/api/bisq');
   const hodlHodlFetch = useFetch('/api/hodl-hodl');
+  const roboSatsFetch = useFetch('/api/robo-sats');
 
   const promises = [
     bityFetch, 
     bisqFetch,
-    hodlHodlFetch
+    hodlHodlFetch,
+    roboSatsFetch
   ];
 
   const [
@@ -26,6 +28,11 @@
       data: { 
         value: hodlHodl 
       }
+    },
+    {
+      data: { 
+        value: roboSats 
+      }
     }
   ] = await Promise.all(promises);
 
@@ -33,17 +40,9 @@
     ...bity,
     ...bisq,
     ...hodlHodl,
+    ...roboSats
   ], 'price'));
-
-  onMounted(async() => {
-    const roboSats = await $fetch('/api/robo-sats')
-    offers.value = [
-      ...offers.value,
-      ...roboSats
-    ]
-  })
 </script>
-
 <template>
   <NuxtLayout>
     <section class="section">

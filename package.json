@@ -21,6 +21,7 @@
   "dependencies": {
     "lodash.groupby": "^4.6.0",
     "lodash.minby": "^4.6.0",
-    "lodash.sortby": "^4.7.0"
+    "lodash.sortby": "^4.7.0",
+    "tor-request": "^3.1.0"
   }
 }

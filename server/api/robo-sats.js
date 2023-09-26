@@ -1,45 +1,38 @@
-import { ofetch } from 'ofetch';
+import tor from 'tor-request';
 import groupBy from 'lodash.groupby';
 import minBy from 'lodash.minby';
 
 export default defineEventHandler(async event => {
 
-  try {
-    const response = await ofetch(`https://unsafe.robosats.com/api/book/?format=json&currency=2&type=1`, {
-      timeout: 3000000,
-      async onRequestError({ request, options, error }) {
-        // Log error
-        console.log("[fetch request error]", request, error);
-      },
-      async onResponseError({ request, response, options }) {
-        // Log error
-        console.log(
-          "[fetch response error]",
-          request,
-          response.status,
-          response.body
-        );
-      },
-    });
-
-    const methods = groupBy(response, 'payment_method');
-
-    return Object.keys(methods).reduce((arr, method) => {
-      const offer = parseFloat(minBy(methods[method], 'price').price).toFixed(2)
-      const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100).toFixed(2)
-  
-      arr.push({
-        service: 'RoboSats',
-        url: 'https://unsafe.robosats.com/',
-        method,
-        price: parseFloat(offer + fee).toFixed(2)
-      });
-      
-      return arr;
-    }, []);
-
-  } catch (error) {
-    console.log('error', error)
-    return []
-  }
+  return await fetchRoboSats();
 });
+
+const fetchRoboSats = () => {
+  return new Promise((resolve, reject) => {
+    return tor.request('http://robosats6tkf3eva7x2voqso3a5wcorsnw34jveyxfqi2fu7oyheasid.onion/api/book/?format=json&currency=2&type=1', function (error, res, body) {
+      if (!error) {
+        const methods = groupBy(JSON.parse(body), 'payment_method');
+  
+        const response = Object.keys(methods).reduce((arr, method) => {
+          const offer = parseFloat(minBy(methods[method], 'price').price).toFixed(2);
+          const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100).toFixed(2);
+      
+          arr.push({
+            service: 'RoboSats',
+            url: 'https://unsafe.robosats.com/',
+            method,
+            price: parseFloat(offer + fee).toFixed(2)
+          });
+          
+          return arr;
+        }, []);
+  
+        resolve(response);
+      }
+      else {
+        console.log('error', error)
+        reject([])
+      }
+    });
+  });
+};
