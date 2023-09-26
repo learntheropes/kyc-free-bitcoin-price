@@ -17,12 +17,14 @@
   const bisqFetch = useFetch('/api/bisq');
   const hodlHodlFetch = useFetch('/api/hodl-hodl');
   const roboSatsFetch = useFetch('/api/robo-sats');
+  const voucherBotFetch = useFetch('/api/voucher-bot')
 
   const promises = [
     bityFetch, 
     bisqFetch,
     hodlHodlFetch,
-    roboSatsFetch
+    roboSatsFetch,
+    voucherBotFetch
   ];
 
   const [
@@ -45,6 +47,11 @@
       data: { 
         value: roboSats 
       }
+    },
+    {
+      data: { 
+        value: voucherBot 
+      }
     }
   ] = await Promise.all(promises);
 
@@ -52,7 +59,8 @@
     ...bity,
     ...bisq,
     ...hodlHodl,
-    ...roboSats
+    ...roboSats,
+    ...voucherBot
   ], 'price');
 </script>
 <template>
@@ -150,7 +158,11 @@
             <span class="has-text-primary has-text-weight-bold">{{ offer.price }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
             <span>&nbsp;</span>
             <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span>
-            <div class="has-text-primary is-hidden-tablet has-text-right">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</div>
+            <div class="is-hidden-tablet has-text-right">
+              <span class="is-hidden-tablet has-text-right">+</span>
+              <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }}</span>
+              <span class="is-hidden-tablet has-text-right">%</span>
+            </div>
           </div>
         </div>
         <div class="column is-narrow is-hidden-mobile">
@@ -159,7 +171,9 @@
             :key="index"
             class="block has-text-right"
           >
-            <span class="has-text-primary">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</span>
+            <span>+</span>
+            <span class="has-text-primary">{{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }}</span>
+            <span>%</span>
           </div>
         </div>
       </div>
