@@ -3,8 +3,11 @@ import groupBy from 'lodash.groupby';
 import minBy from 'lodash.minby';
 
 export default defineEventHandler(async event => {
-
-  return await fetchRoboSats();
+  try {
+    return await fetchRoboSats();
+  } catch (error) {
+    return [];
+  }
 });
 
 const fetchRoboSats = () => {
