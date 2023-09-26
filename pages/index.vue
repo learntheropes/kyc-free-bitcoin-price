@@ -83,6 +83,26 @@
               :href="offer.url"
               target="_blank"
             >{{ offer.service }}</NuxtLink>
+            <div class="is-hidden-tablet">
+              <span 
+                v-if="offer.features.includes('on-chain')" 
+                class="icon is-small"
+              >
+                <i class="mdi mdi-bitcoin"></i>
+              </span>
+              <span 
+                v-if="offer.features.includes('lightning')" 
+                class="icon is-small"
+              >
+                <i class="mdi mdi-lightning-bolt"></i>
+              </span>
+              <span 
+                v-if="offer.features.includes('p2p')" 
+                class="icon is-small"
+              >
+                <i class="mdi mdi-account-multiple"></i>
+              </span>
+            </div>
           </div>
         </div>
         <div class="column is-narrow is-hidden-mobile">
@@ -116,7 +136,10 @@
             v-for="(offer, index) of offers" 
             :key="index"
             class="block"
-          >{{ offer.method.replace(/\(([^\)]+)\)/, '') }}</div>
+          >
+            <span>{{ offer.method.replace(/\(([^\)]+)\)/, '') }}</span>
+            <div class="is-hidden-tablet">&nbsp;</div>
+          </div>
         </div>
         <div class="column is-narrow">
           <div 
@@ -124,9 +147,10 @@
             :key="index"
             class="block"
           >
-            <span class="has-text-primary has-text-weight-bold">{{ offer.price }}</span> 
+            <span class="has-text-primary has-text-weight-bold">{{ offer.price }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
             <span>&nbsp;</span>
-            <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span> 
+            <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span>
+            <div class="has-text-primary is-hidden-tablet">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</div>
           </div>
         </div>
         <div class="column is-narrow is-hidden-mobile">
