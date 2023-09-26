@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-      <div class="columns is-mobile is-centered">
+      <div class="section columns is-centered">
         <div class="column is-narrow">
           <div 
             v-for="(offer, index) of offers" 
@@ -161,6 +161,26 @@
           >
             <span class="has-text-primary">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</span>
           </div>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-narrow">
+          <span class="icon is-small">
+            <i class="mdi mdi-bitcoin"></i>
+          </span>
+          <span>On-chain</span>
+        </div>
+        <div class="column is-narrow">
+          <span class="icon is-small">
+            <i class="mdi mdi-lightning-bolt"></i>
+          </span>
+          <span>Lightning Network</span>
+        </div>
+        <div class="column is-narrow">
+          <span class="icon is-small">
+            <i class="mdi mdi-account-multiple"></i>
+          </span>
+          <span>Peer to Peer</span>
         </div>
       </div>
     </section>
