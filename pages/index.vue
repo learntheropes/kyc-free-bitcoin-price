@@ -52,18 +52,21 @@
           <div 
             v-for="(offer, index) of offers" 
             :key="index"
+            class="block"
           >{{ offer.service }}</div>
         </div>
         <div class="column is-narrow">
           <div 
             v-for="(offer, index) of offers" 
             :key="index"
+            class="block"
           >{{ offer.method }}</div>
         </div>
         <div class="column is-narrow">
           <div 
             v-for="(offer, index) of offers" 
             :key="index"
+            class="block"
           >
             <span class="has-text-primary has-text-weight-bold">{{ offer.price }}</span> 
             <span>&nbsp;</span>
@@ -74,10 +77,10 @@
           <div 
             v-for="(offer, index) of offers" 
             :key="index"
-            class="has-text-right"
+            class="block has-text-right"
           >
             <span v-if="index === 0">&nbsp;</span>
-            <span v-else>+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</span>
+            <span v-else class="has-text-primary">+ {{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }} %</span>
           </div>
         </div>
       </div>
