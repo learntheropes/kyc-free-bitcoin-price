@@ -70,7 +70,7 @@
           >
             <span class="has-text-primary has-text-weight-bold">{{ offer.price }}</span> 
             <span>&nbsp;</span>
-            <span class="has-text-warning">EUR/BTC</span> 
+            <span class="has-text-grey">EUR/BTC</span> 
           </div>
         </div>
         <div class="column is-narrow">

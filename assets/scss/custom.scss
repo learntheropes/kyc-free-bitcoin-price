@@ -1,9 +1,6 @@
 $custom: rgb(247, 147, 26) !default;
 $primary: $custom;
 $link: $custom;
-$danger: $custom;
-$info: white;
-$warning: grey;
-$success: black;
+$grey: grey;
 
 @import "../node_modules/bulma/bulma.sass";
