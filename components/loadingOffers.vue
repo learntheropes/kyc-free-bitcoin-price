@@ -7,7 +7,7 @@
 </script>
 
 <template>
-  <div v-if="isLoading" class="columns is-centered is-overlay is-align-items-center">
+  <div v-if="isLoading" class="columns is-mobile is-centered is-overlay is-align-items-center">
     <div class="column is-narrow">
       <span class="icon is-large">
         <i class="mdi mdi-48px mdi-loading" />
