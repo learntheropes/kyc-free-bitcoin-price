@@ -14,6 +14,7 @@ export default defineEventHandler(async event => {
       .reduce((arr, method) => {
         arr.push({
           service: 'Hodl Hodl',
+          url: 'https://hodlhodl.com',
           method: method.payment_method_name,
           price: parseFloat(parseFloat(offer.price) * (1 + parseFloat(offer.fee.author_fee_rate) + parseFloat(offer.fee.intermediary_fee_rate))).toFixed(2)
         })

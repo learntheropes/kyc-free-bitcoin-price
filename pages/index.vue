@@ -53,7 +53,12 @@
             v-for="(offer, index) of offers" 
             :key="index"
             class="block"
-          >{{ offer.service }}</div>
+          >
+            <NuxtLink
+              :href="offer.url"
+              target="_blank"
+            >{{ offer.service }}</NuxtLink>
+          </div>
         </div>
         <div class="column is-narrow">
           <div 

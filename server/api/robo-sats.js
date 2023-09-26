@@ -30,6 +30,7 @@ export default defineEventHandler(async event => {
   
       arr.push({
         service: 'RoboSats',
+        url: 'https://unsafe.robosats.com/',
         method,
         price: parseFloat(offer + fee).toFixed(2)
       });

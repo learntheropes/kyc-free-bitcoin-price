@@ -18,10 +18,11 @@ export default defineEventHandler(async event => {
 
     arr.push({
       service: 'Bisq',
+      site: 'https://bisq.network/',
       method,
       price: parseFloat(offer + fee).toFixed(2)
     });
-    
+
     return arr;
   }, []);
 })
