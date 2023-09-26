@@ -35,12 +35,12 @@ export default defineEventHandler(async event => {
     {
       service: 'Bity',
       url: 'https://bity.com/',
-      method: 'SEPA_INSTANT',
+      method: 'Sepa Instant',
       price
     },
     {
       service: 'Bity',
-      method: 'SEPA',
+      method: 'Sepa',
       price
     }
   ]
