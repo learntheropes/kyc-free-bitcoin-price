@@ -65,6 +65,13 @@
               href="https://github.com/learntheropes/kyc-free-bitcoin-price"
               target="_blank"
             >learntheropes/kyc-free-bitcoin-price</NuxtLink>
+            <span class="icon">
+              <i class="mdi mdi-developer-board"></i>
+            </span>
+            <NuxtLink
+              href="/api/offers/sell"
+              target="_blank"
+            >/api</NuxtLink>
           </div>
         </div>
       </div>
