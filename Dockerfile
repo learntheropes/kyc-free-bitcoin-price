@@ -17,6 +17,10 @@ WORKDIR /app
 # Bundle the app source inside the docker image
 COPY . .
 
+# Set app environment variables
+ARG DEPLOYMENT_DOMAIN
+ENV DEPLOYMENT_DOMAIN=${DEPLOYMENT_DOMAIN}
+
 # Install all the app npm packages
 RUN npm install
 
