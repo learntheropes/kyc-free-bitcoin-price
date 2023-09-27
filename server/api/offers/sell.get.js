@@ -10,8 +10,6 @@ export default defineEventHandler(async event => {
       }
     } = useRuntimeConfig();
 
-    console.log('deploymentDomain', deploymentDomain)
-
     const customOfetch = ofetch.create({
       baseURL: deploymentDomain,
       async onRequestError({ request, error }) {
@@ -20,7 +18,7 @@ export default defineEventHandler(async event => {
       async onResponseError({ request, response }) {
         console.error('Failed to fetch resource', request, response.status, response.body);
       },
-    })
+    });
   
     const bisqFetch = customOfetch('/api/bisq');
     const bityFetch = customOfetch('/api/bity');
@@ -57,7 +55,7 @@ export default defineEventHandler(async event => {
       error: false
     };
   } catch (error) {
-    console.log('sell offers api error', error)
+    console.log('sell offers api error', error);
     setResponseStatus(event, 500);
     return {
       error: true,
