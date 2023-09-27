@@ -1,4 +1,4 @@
-const deploymentDomain = process.env.DEPLOYMENT_DOMAIN || 'http://localhost:3000'
+const deploymentDomain = process.env.DEPLOYMENT_DOMAIN || 'http://localhost:3000';
 
 export default defineNuxtConfig({
 
