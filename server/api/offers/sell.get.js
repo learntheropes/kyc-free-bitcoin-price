@@ -10,6 +10,8 @@ export default defineEventHandler(async event => {
       }
     } = useRuntimeConfig();
 
+    console.log('deploymentDomain', deploymentDomain)
+
     const customOfetch = ofetch.create({
       baseURL: deploymentDomain,
       async onRequestError({ request, error }) {

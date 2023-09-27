@@ -1,6 +1,4 @@
-const isDev = process.env.NODE_ENV !== 'production'
-const isDeployed = process.env.DEPLOYMENT_DOMAIN && process.env.DEPLOYMENT_DOMAIN !== 'http://localhost:3000'
-const deploymentDomain = (isDeployed) ? `https://${process.env.DEPLOYMENT_DOMAIN}` : 'http://localhost:3000'
+const deploymentDomain = process.env.DEPLOYMENT_DOMAIN || 'http://localhost:3000'
 
 export default defineNuxtConfig({
 
