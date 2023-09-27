@@ -1,8 +1,30 @@
+<script setup>
+const nuxtApp = useNuxtApp();
+const host = (process.client) 
+  ? window.location.href.replace('https://', '').replace('http://', '').replace('/', '')
+  : nuxtApp.ssrContext.event.node.req.headers.host;
 
+const {
+  public: {
+    deploymentDomain
+  }
+} = useRuntimeConfig();
+
+const { fullPath } = useRoute();
+
+if (host !== deploymentDomain.replace('https://', '').replace('http://', '')) {
+  await navigateTo(`${deploymentDomain}${fullPath}`, {
+    external: true,
+    redirectCode: 301
+  })
+}
+</script>
 <template>
   <div>
     <Html>
       <Body>
+        {{ deploymentDomain }}
+        bool: {{ host !== deploymentDomain.replace('https://', '').replace('http://', '') }}
         <div class="full-body">
           <main class="main-content">
             <div class="container">
