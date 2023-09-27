@@ -23,8 +23,6 @@ if (host !== deploymentDomain.replace('https://', '').replace('http://', '')) {
   <div>
     <Html>
       <Body>
-        {{ deploymentDomain }}
-        bool: {{ host !== deploymentDomain.replace('https://', '').replace('http://', '') }}
         <div class="full-body">
           <main class="main-content">
             <div class="container">
