@@ -4,7 +4,6 @@ export default defineEventHandler(async event => {
 
   try {
     const response = await ofetch(`https://api.kraken.com/0/public/Ticker?pair=XBTEUR`);
-  
     const { 
       result: { 
         XXBTZEUR: {

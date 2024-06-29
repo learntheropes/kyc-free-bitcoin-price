@@ -20,18 +20,16 @@ export default defineEventHandler(async event => {
       },
     });
   
-    const bisqFetch = customOfetch('/api/sell/bisq');
-    const bityFetch = customOfetch('/api/sell/bity');
+    const bisqFetch = customOfetch('/api/buy/bisq');
+    const bityFetch = customOfetch('/api/buy/bity');
     const hodlHodlFetch = customOfetch('/api/sell/hodl-hodl');
-    const roboSatsFetch = customOfetch('/api/sell/robo-sats');
-    const voucherBotFetch = customOfetch('/api/sell/voucher-bot');
+    const roboSatsFetch = customOfetch('/api/buy/robo-sats');
   
     const promises = [
       bityFetch, 
       bisqFetch,
       // hodlHodlFetch,
-      roboSatsFetch,
-      voucherBotFetch
+      roboSatsFetch
     ];
   
     const [
@@ -39,16 +37,14 @@ export default defineEventHandler(async event => {
       bisq,
       // hodlHodl,
       roboSats,
-      voucherBot
     ] = await Promise.all(promises);
   
     const offers = sortBy([
       ...bity,
       ...bisq,
       // ...hodlHodl,
-      ...roboSats,
-      ...voucherBot
-    ], 'price');
+      ...roboSats
+    ], 'price').reverse();
 
     return { 
       data: offers,

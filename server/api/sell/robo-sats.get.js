@@ -12,9 +12,7 @@ export default defineEventHandler(async event => {
 
 const fetchRoboSats = () => {
   return new Promise((resolve, reject) => {
-    // tor.setTorAddress('127.0.0.1', 443) // defaults to "127.0.0.1" on port 9050
-
-    return tor.request('http://robosats6tkf3eva7x2voqso3a5wcorsnw34jveyxfqi2fu7oyheasid.onion/api/book/?format=json&currency=2&type=1', function (error, res, body) {
+    return tor.request('http://satstraoq35jffvkgpfoqld32nzw2siuvowanruindbfojowpwsjdgad.onion/api/book/?format=json&currency=2&type=1', function (error, res, body) {
       if (!error) {
         const methods = groupBy(JSON.parse(body), 'payment_method');
   

@@ -13,44 +13,32 @@
     ],
   });
 
-  let offers = ref([]);
+  let sellOffers = ref([]);
+  let buyOffers = ref([]);
 
   onMounted(async () => {
 
-    const bityFetch = $fetch('/api/bity');
-    const bisqFetch = $fetch('/api/bisq');
-    const hodlHodlFetch = $fetch('/api/hodl-hodl');
-    const roboSatsFetch = $fetch('/api/robo-sats');
-    const voucherBotFetch = $fetch('/api/voucher-bot');
+    const buyOffersFetch = $fetch('/api/offers/buy');
+    const sellOffersFetch = $fetch('/api/offers/sell');
 
     const promises = [
-      bityFetch, 
-      bisqFetch,
-      hodlHodlFetch,
-      roboSatsFetch,
-      voucherBotFetch
+      buyOffersFetch,
+      sellOffersFetch
     ];
 
     const [
-      bity,
-      bisq,
-      hodlHodl,
-      roboSats,
-      voucherBot
+      buy,
+      sell
     ] = await Promise.all(promises);
 
-    offers.value = sortBy([
-      ...bity,
-      ...bisq,
-      ...hodlHodl,
-      ...roboSats,
-      ...voucherBot
-    ], 'price');
+    buyOffers.value = await sortBy(buy.data, 'price').reverse();
+    sellOffers.value = await sortBy(sell.data, 'price');
 
     const { $event } = useNuxtApp();
     $event('isLoading', false);
   });
 </script>
+
 <template>
   <NuxtLayout>
     <section class="section">
@@ -89,7 +77,7 @@
           <div class="columns is-centered is-mobile">
             <div class="column is-narrow">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of sellOffers" 
                 :key="index"
                 class="block"
               >
@@ -104,7 +92,7 @@
             </div>
             <div class="column is-narrow is-hidden-mobile">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of sellOffers" 
                 :key="index"
                 class="block"
               >
@@ -113,7 +101,7 @@
             </div>
             <div class="column is-narrow">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of sellOffers" 
                 :key="index"
                 class="block"
               >
@@ -123,7 +111,7 @@
             </div>
             <div class="column is-narrow">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of sellOffers" 
                 :key="index"
                 class="block"
               >
@@ -132,24 +120,28 @@
                 <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
                   <span class="is-hidden-tablet has-text-right">+</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }}</span>
+                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((sellOffers.price - sellOffers[0].price) / sellOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
             </div>
             <div class="column is-narrow is-hidden-mobile">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of sellOffers" 
                 :key="index"
                 class="block has-text-right"
               >
                 <span>+</span>
-                <span class="has-text-primary">{{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }}</span>
+                <span class="has-text-primary">{{ ((offer.price - sellOffers[0].price) / sellOffers[0].price * 100).toFixed(2) }}</span>
                 <span>%</span>
               </div>
             </div>
           </div>
         </div>
+
+
+
+
         <div class="column is-narrow block">
           <div class="columns is-centered">
             <div class="column is-narrow">
@@ -165,12 +157,10 @@
               </div>
             </div>
           </div>
-
-          <!-- START FAKE DATA -->
           <div class="columns is-centered is-mobile">
             <div class="column is-narrow">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of buyOffers" 
                 :key="index"
                 class="block"
               >
@@ -179,56 +169,22 @@
                   target="_blank"
                 >{{ offer.service }}</NuxtLink>
                 <div class="is-hidden-tablet">
-                  <span 
-                    v-if="offer.features.includes('on-chain')" 
-                    class="icon is-small"
-                  >
-                    <i class="mdi mdi-bitcoin"></i>
-                  </span>
-                  <span 
-                    v-if="offer.features.includes('lightning')" 
-                    class="icon is-small"
-                  >
-                    <i class="mdi mdi-lightning-bolt"></i>
-                  </span>
-                  <span 
-                    v-if="offer.features.includes('p2p')" 
-                    class="icon is-small"
-                  >
-                    <i class="mdi mdi-account-multiple"></i>
-                  </span>
+                  <ServiceFeatures :offer="offer" />
                 </div>
               </div>
             </div>
             <div class="column is-narrow is-hidden-mobile">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of buyOffers" 
                 :key="index"
                 class="block"
               >
-                <span 
-                  v-if="offer.features.includes('on-chain')" 
-                  class="icon is-small"
-                >
-                  <i class="mdi mdi-bitcoin"></i>
-                </span>
-                <span 
-                  v-if="offer.features.includes('lightning')" 
-                  class="icon is-small"
-                >
-                  <i class="mdi mdi-lightning-bolt"></i>
-                </span>
-                <span 
-                  v-if="offer.features.includes('p2p')" 
-                  class="icon is-small"
-                >
-                  <i class="mdi mdi-account-multiple"></i>
-                </span>
+                <ServiceFeatures :offer="offer" />
               </div>
             </div>
             <div class="column is-narrow">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of buyOffers" 
                 :key="index"
                 class="block"
               >
@@ -238,7 +194,7 @@
             </div>
             <div class="column is-narrow">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of buyOffers" 
                 :key="index"
                 class="block"
               >
@@ -246,27 +202,32 @@
                 <span>&nbsp;</span>
                 <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
-                  <span class="is-hidden-tablet has-text-right">+</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }}</span>
+                  <span class="is-hidden-tablet has-text-right">-</span>
+                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((buyOffers.price - buyOffers[0].price) / buyOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
             </div>
             <div class="column is-narrow is-hidden-mobile">
               <div 
-                v-for="(offer, index) of offers" 
+                v-for="(offer, index) of buyOffers" 
                 :key="index"
                 class="block has-text-right"
               >
-                <span>+</span>
-                <span class="has-text-primary">{{ ((offer.price - offers[0].price) / offers[0].price * 100).toFixed(2) }}</span>
+                <span>-</span>
+                <span class="has-text-primary">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100).toFixed(2) }}</span>
                 <span>%</span>
               </div>
             </div>
           </div>
-          <!-- END FAKE DATA -->
-          
         </div>
+
+
+
+
+
+
+
       </div>
     </section>
   </NuxtLayout>

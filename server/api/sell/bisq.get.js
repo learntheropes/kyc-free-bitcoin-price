@@ -10,7 +10,7 @@ export default defineEventHandler(async event => {
         sells 
       }
     } = await ofetch('https://bisq.markets/api/offers?market=BTC_EUR');
-  
+
     const methods = groupBy(sells, 'payment_method');
   
     return Object.keys(methods).reduce((arr, method) => {
