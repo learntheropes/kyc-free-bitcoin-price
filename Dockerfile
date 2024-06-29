@@ -1,4 +1,3 @@
-
 # Set the base image to Node 16
 FROM node:18
 
@@ -7,9 +6,6 @@ RUN apt-get update && apt-get upgrade -y
 
 # Install Tor
 RUN apt-get install -y tor
-
-# Run Tor as daemon
-# RUN /usr/bin/tor --RunAsDaemon 1
 
 # Set the working directory to /app
 WORKDIR /app
@@ -27,8 +23,8 @@ RUN npm install
 # Build the nuxt app
 RUN npm run build
 
-# Bind docker deamon to port 8080
+# Bind docker daemon to port 8080
 EXPOSE 8080
 
-# Start command
-CMD [ "node", ".output/server/index.mjs" ]
+# Start Tor and the Node application
+CMD service tor start && node .output/server/index.mjs
