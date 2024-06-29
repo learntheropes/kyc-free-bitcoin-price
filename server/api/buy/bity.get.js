@@ -7,18 +7,19 @@ export default defineEventHandler(async event => {
       method: 'POST',
       body: {
         input: {
-            currency: 'BTC'
+            currency: 'BTC',
+            amount: '1',
+
         },
         output: {
             currency: 'EUR',
-            amount: '70000',
 
         }
       }
     });
   
     const { 
-      input: { 
+      output: { 
         amount: basePrice
       }, 
       price_breakdown: { 
@@ -31,7 +32,7 @@ export default defineEventHandler(async event => {
       }
     } = response;
   
-    const price =  parseFloat(parseFloat(basePrice) + parseFloat(tradingFee) + parseFloat(nonVerifiedFee)).toFixed(2);
+    const price =  parseFloat(parseFloat(basePrice) - parseFloat(tradingFee) - parseFloat(nonVerifiedFee)).toFixed(2);
   
     return [
       {
