@@ -22,14 +22,14 @@ export default defineEventHandler(async event => {
   
     const bisqFetch = customOfetch('/api/buy/bisq');
     const bityFetch = customOfetch('/api/buy/bity');
-    const hodlHodlFetch = customOfetch('/api/sell/hodl-hodl');
+    const hodlHodlFetch = customOfetch('/api/buy/hodl-hodl');
     const roboSatsFetch = customOfetch('/api/buy/robo-sats');
   
     const promises = [
       bityFetch, 
       bisqFetch,
       // hodlHodlFetch,
-      roboSatsFetch
+      roboSatsFetch,
     ];
   
     const [
@@ -43,7 +43,7 @@ export default defineEventHandler(async event => {
       ...bity,
       ...bisq,
       // ...hodlHodl,
-      ...roboSats
+      ...roboSats,
     ], 'price').reverse();
 
     return { 
