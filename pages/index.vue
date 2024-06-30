@@ -120,7 +120,7 @@
                 <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
                   <span class="is-hidden-tablet has-text-right">+</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((sellOffers.price - sellOffers[0].price) / sellOffers[0].price * 100).toFixed(2) }}</span>
+                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - sellOffers[0].price) / sellOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
@@ -203,7 +203,7 @@
                 <span class="has-text-grey is-size-7 is-hidden-mobile">EUR/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
                   <span class="is-hidden-tablet has-text-right">-</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((buyOffers.price - buyOffers[0].price) / buyOffers[0].price * 100).toFixed(2) }}</span>
+                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
