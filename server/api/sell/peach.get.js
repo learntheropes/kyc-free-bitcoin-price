@@ -26,7 +26,7 @@ export default defineEventHandler(async event => {
               'on-chain',
               'p2p'
             ],
-            method: (method.startsWith('cash.')) ? 'cash' : method,
+            method: (method.startsWith('cash.')) ? 'Cash' : capitalize(method),
             price: (basePrice * (offer.premium/100 + 1) * 1.02).toFixed(2)
           });
         })
