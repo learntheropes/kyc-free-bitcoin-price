@@ -11,14 +11,19 @@ export default defineEventHandler(async event => {
     
     offers.map(offer => {
   
-      const offerAllMethods = offer.payment_method_instructions
-        .filter(method => method.payment_method_type !== 'Cryptocurrency')
+      const offerAllMethods = offer.payment_methods
+        .filter(method => method.type !== 'Cryptocurrency')
         .reduce((arr, method) => {
           arr.push({
             service: 'HodlHodl',
             url: 'https://hodlhodl.com/join/HCJ6',
             features: ['on-chain', 'p2p'],
-            method: capitalize(method.payment_method_name).replace('(eu)', '').replace('Sepa  Bank Transfer', 'Sepa').replace('Payconiq By Bancontact', 'Payconiq'),
+            method: capitalize(method.name)
+              .replace('(EU)', '')
+              .replace('Sepa  Bank Transfer', 'Sepa')
+              .replace('Payconiq By Bancontact', 'Payconiq')
+              .replace('Mastercard Para Ti Plus', 'Mastercard Para Ti')
+              .replace('Sabadell Instant Money', 'Sabadell Instant'),
             price: parseFloat(parseFloat(offer.price) * (1 + parseFloat(offer.fee.author_fee_rate) + parseFloat(offer.fee.intermediary_fee_rate))).toFixed(2)
           })
           return arr;

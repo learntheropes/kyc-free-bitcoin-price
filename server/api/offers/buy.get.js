@@ -28,21 +28,21 @@ export default defineEventHandler(async event => {
     const promises = [
       bityFetch, 
       bisqFetch,
-      // hodlHodlFetch,
+      hodlHodlFetch,
       roboSatsFetch,
     ];
   
     const [
       bity,
       bisq,
-      // hodlHodl,
+      hodlHodl,
       roboSats,
     ] = await Promise.all(promises);
   
     const offers = sortBy([
       ...bity,
       ...bisq,
-      // ...hodlHodl,
+      ...hodlHodl,
       ...roboSats,
     ], 'price').reverse();
 
