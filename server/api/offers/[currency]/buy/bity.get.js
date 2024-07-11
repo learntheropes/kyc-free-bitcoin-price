@@ -4,6 +4,8 @@ export default defineEventHandler(async event => {
 
   try {
     const currency = getRouterParam(event, 'currency');
+    if (currency !== 'EUR' && currency !== 'CHF') return [];
+
     const response = await ofetch(`https://exchange.api.bity.com/v2/orders/estimate`, {
       method: 'POST',
       body: {
