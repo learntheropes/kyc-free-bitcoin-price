@@ -1,23 +1,4 @@
 <script setup>
-// const nuxtApp = useNuxtApp();
-// const host = (process.client) 
-//   ? window.location.href.replace('https://', '').replace('http://', '').replace('/', '')
-//   : nuxtApp.ssrContext.event.node.req.headers.host;
-
-// const {
-//   public: {
-//     deploymentDomain
-//   }
-// } = useRuntimeConfig();
-
-// const { fullPath } = useRoute();
-
-// if (host !== deploymentDomain.replace('https://', '').replace('http://', '')) {
-//   await navigateTo(`${deploymentDomain}${fullPath}`, {
-//     external: true,
-//     redirectCode: 301
-//   })
-// }
 const route = useRoute()
 
 const title = 'KYC Free Bitcoin Price'
