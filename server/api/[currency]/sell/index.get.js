@@ -28,6 +28,7 @@ export default defineEventHandler(async event => {
     const roboSatsFetch = customOfetch(`/api/${currency}/sell/robosats`);
     const voucherBotFetch = customOfetch(`/api/${currency}/sell/voucherbot`);
     const peachFetch = customOfetch(`/api/${currency}/sell/peach`);
+    const lnp2pbotFetch = customOfetch(`/api/${currency}/sell/lnp2pbot`);
   
     const promises = [
       bityFetch, 
@@ -35,7 +36,8 @@ export default defineEventHandler(async event => {
       hodlHodlFetch,
       roboSatsFetch,
       voucherBotFetch,
-      peachFetch
+      peachFetch,
+      lnp2pbotFetch
     ];
   
     const [
@@ -44,7 +46,8 @@ export default defineEventHandler(async event => {
       hodlHodl,
       roboSats,
       voucherBot,
-      peach
+      peach,
+      lnp2pbot
     ] = await Promise.all(promises);
   
     const offers = sortBy([
@@ -53,7 +56,8 @@ export default defineEventHandler(async event => {
       ...hodlHodl,
       ...roboSats,
       ...voucherBot,
-      ...peach
+      ...peach,
+      ...lnp2pbot
     ], 'price');
 
     return { 
