@@ -27,7 +27,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Comparison website to purchase KYC free bitcoins at the cheapes price available on the free market.'
+      content: 'Aggregated order book for KYC-free bitcoin trading.'
     },
   ],
 });
