@@ -7,6 +7,8 @@
     }
   } = useRoute();
 
+  const decimals = (currency === 'ARS') ? 0 : 2;
+
   let sellOffers = ref([]);
   let buyOffers = ref([]);
 
@@ -94,7 +96,7 @@
                 :key="index"
                 class="block"
               >
-                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(2) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
+                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(decimals) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
                 <span>&nbsp;</span>
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
@@ -174,7 +176,7 @@
                 :key="index"
                 class="block"
               >
-                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(2) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
+                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(decimals) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
                 <span>&nbsp;</span>
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
