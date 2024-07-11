@@ -1,12 +1,12 @@
 <script setup>
   const currencies = await $fetch(`/api/currencies`);
+  const platforms = await $fetch(`/api/platforms`);
 </script>
 
 <template>
   <NuxtLayout>
     <section class="section">
       <div class="columns is-centered is-multiline is-variable is-16">
-        
         <div class="buttons">
           <div 
             v-for="currency in currencies" 
@@ -14,9 +14,9 @@
             class="button"
           ><NuxtLink :to="'/'+currency">{{ currency }}</NuxtLink></div>
         </div>
-
       </div>
     </section>
+    <section class="section has-text-centered">{{ platforms.join(', ') }}</section>
   </NuxtLayout>
 </template>
 
