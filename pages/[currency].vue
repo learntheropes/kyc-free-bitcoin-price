@@ -7,7 +7,8 @@
     }
   } = useRoute();
 
-  const decimals = (currency === 'ARS') ? 0 : 2;
+  const nonDecimalsCurrencies = ['ARS', 'VES']
+  const decimals = (nonDecimalsCurrencies.includes(currency)) ? 0 : 2;
 
   let sellOffers = ref([]);
   let buyOffers = ref([]);
