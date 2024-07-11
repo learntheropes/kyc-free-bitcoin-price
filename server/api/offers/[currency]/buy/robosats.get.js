@@ -19,7 +19,12 @@ const fetchRoboSats = (currency) => {
   return new Promise((resolve, reject) => {
     return tor.request(`http://satstraoq35jffvkgpfoqld32nzw2siuvowanruindbfojowpwsjdgad.onion/api/book/?format=json&currency=${currencyIndex}&type=2`, function (error, res, body) {
 
-      if (!error && !JSON.parse(body)['not_found']) {
+      if (error) {
+        console.log('robosats api error', error);
+        reject([]);
+      }
+      
+      else if (!JSON.parse(body)['not_found']) {
 
         const methods = groupBy(JSON.parse(body), 'payment_method');
   
@@ -46,8 +51,7 @@ const fetchRoboSats = (currency) => {
         resolve(response);
       }
       else {
-        console.log('robosats api error', error)
-        reject([])
+        reject([]);
       }
     });
   });
