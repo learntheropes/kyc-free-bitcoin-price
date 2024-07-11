@@ -21,7 +21,7 @@ export default defineEventHandler(async event => {
         return offer.meansOfPayment[currency].forEach(method => {
           results.push({
             service: 'Peach Bitcoin',
-            url: 'https://peachbitcoin.com',
+            url: 'https://peachbitcoin.com/referral?code=PR41CA',
             features: [
               'on-chain',
               'p2p'
