@@ -22,13 +22,13 @@ export default defineEventHandler(async event => {
       },
     });
   
-    const bisqFetch = customOfetch(`/api/${currency}/sell/bisq`);
-    const bityFetch = customOfetch(`/api/${currency}/sell/bity`);
-    const hodlHodlFetch = customOfetch(`/api/${currency}/sell/hodlhodl`);
-    const roboSatsFetch = customOfetch(`/api/${currency}/sell/robosats`);
-    const voucherBotFetch = customOfetch(`/api/${currency}/sell/voucherbot`);
-    const peachFetch = customOfetch(`/api/${currency}/sell/peach`);
-    const lnp2pbotFetch = customOfetch(`/api/${currency}/sell/lnp2pbot`);
+    const bisqFetch = customOfetch(`/api/offers/${currency}/sell/bisq`);
+    const bityFetch = customOfetch(`/api/offers/${currency}/sell/bity`);
+    const hodlHodlFetch = customOfetch(`/api/offers/${currency}/sell/hodlhodl`);
+    const roboSatsFetch = customOfetch(`/api/offers/${currency}/sell/robosats`);
+    const voucherBotFetch = customOfetch(`/api/offers/${currency}/sell/voucherbot`);
+    const peachFetch = customOfetch(`/api/offers/${currency}/sell/peach`);
+    const lnp2pbotFetch = customOfetch(`/api/offers/${currency}/sell/lnp2pbot`);
   
     const promises = [
       bityFetch, 

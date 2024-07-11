@@ -17,7 +17,7 @@ export default defineEventHandler(async event => {
       }
     } = response;
   
-    const price =  parseFloat(exchangePrice).toFixed(2);
+    const price =  parseFloat(exchangePrice);
   
     return [
       {
@@ -25,21 +25,21 @@ export default defineEventHandler(async event => {
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
         features: ['on-chain', 'lightning'],
         method: 'Sepa Instant',
-        price: parseFloat(price * 1.025).toFixed(2)
+        price: parseFloat(price * 1.025)
       },
       {
         service: 'VoucherBot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
         features: ['on-chain', 'lightning'],
         method: 'Sepa',
-        price: parseFloat(price * 1.025).toFixed(2)
+        price: parseFloat(price * 1.025)
       },
       {
         service: 'VoucherBot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
         features: ['on-chain', 'lightning'],
         method: 'Voucher',
-        price: parseFloat(price * 1.05).toFixed(2)
+        price: parseFloat(price * 1.05)
       }
     ]
   } catch (error) {

@@ -12,8 +12,8 @@
 
   onMounted(async () => {
 
-    const buyOffersFetch = $fetch(`/api/${currency}/buy`);
-    const sellOffersFetch = $fetch(`/api/${currency}/sell`);
+    const buyOffersFetch = $fetch(`/api/offers/${currency}/buy`);
+    const sellOffersFetch = $fetch(`/api/offers/${currency}/sell`);
 
     const promises = [
       buyOffersFetch,
@@ -47,9 +47,9 @@
                   <i class="mdi mdi-developer-board" />
                 </span>
                 <NuxtLink
-                  :href="'/api/'+currency+'/sell'"
+                  :href="'/api/offers/'+currency+'/sell'"
                   target="_blank"
-                >/api/{{ currency }}/sell</NuxtLink>
+                >/api/offers/{{ currency }}/sell</NuxtLink>
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@
                 :key="index"
                 class="block"
               >
-                <span class="has-text-primary has-text-weight-bold">{{ offer.price }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
+                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(2) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
                 <span>&nbsp;</span>
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
@@ -127,9 +127,9 @@
                   <i class="mdi mdi-developer-board" />
                 </span>
                 <NuxtLink
-                  :href="'/api/'+currency+'/buy'"
+                  :href="'/api/offers/'+currency+'/buy'"
                   target="_blank"
-                >/api/{{ currency }}/buy</NuxtLink>
+                >/api/offers/{{ currency }}/buy</NuxtLink>
               </div>
             </div>
           </div>
@@ -174,7 +174,7 @@
                 :key="index"
                 class="block"
               >
-                <span class="has-text-primary has-text-weight-bold">{{ offer.price }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
+                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(2) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
                 <span>&nbsp;</span>
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">

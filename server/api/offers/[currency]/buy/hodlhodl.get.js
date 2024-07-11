@@ -25,7 +25,7 @@ export default defineEventHandler(async event => {
               .replace('Payconiq By Bancontact', 'Payconiq')
               .replace('Mastercard Para Ti Plus', 'Mastercard Para Ti')
               .replace('Sabadell Instant Money', 'Sabadell Instant'),
-            price: parseFloat(parseFloat(offer.price) * (1 - parseFloat(offer.fee.author_fee_rate) - parseFloat(offer.fee.intermediary_fee_rate))).toFixed(2)
+            price: parseFloat(parseFloat(offer.price) * (1 - parseFloat(offer.fee.author_fee_rate) - parseFloat(offer.fee.intermediary_fee_rate)))
           })
           return arr;
         }, []);

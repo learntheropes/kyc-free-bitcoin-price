@@ -24,8 +24,8 @@ const fetchRoboSats = (currency) => {
         const methods = groupBy(JSON.parse(body), 'payment_method');
   
         const response = Object.keys(methods).reduce((arr, method) => {
-          const offer = parseFloat(minBy(methods[method], 'price').price).toFixed(2);
-          const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100).toFixed(2);
+          const offer = parseFloat(minBy(methods[method], 'price').price);
+          const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100);
       
           method
             .split(' ')
@@ -36,7 +36,7 @@ const fetchRoboSats = (currency) => {
                 url: 'https://unsafe.robosats.com/',
                 features: ['lightning', 'p2p', 'open-source'],
                 method: capitalize(normilizedMethod).replace('Instant', 'Sepa Instant'),
-                price: parseFloat(offer + fee).toFixed(2)
+                price: parseFloat(offer + fee)
               });
             })
           

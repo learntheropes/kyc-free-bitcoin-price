@@ -32,7 +32,7 @@ export default defineEventHandler(async event => {
       }
     } = response;
   
-    const price =  parseFloat(parseFloat(basePrice) + parseFloat(tradingFee) + parseFloat(nonVerifiedFee)).toFixed(2);
+    const price =  parseFloat(parseFloat(basePrice) + parseFloat(tradingFee) + parseFloat(nonVerifiedFee));
   
     return [
       {

@@ -24,7 +24,7 @@ export default defineEventHandler(async event => {
               .replace('(eu)', '')
               .replace('Sepa  Bank Transfer', 'Sepa')
               .replace('Payconiq By Bancontact', 'Payconiq'),
-            price: parseFloat(parseFloat(offer.price) * (1 + parseFloat(offer.fee.author_fee_rate) + parseFloat(offer.fee.intermediary_fee_rate))).toFixed(2)
+            price: parseFloat(parseFloat(offer.price) * (1 + parseFloat(offer.fee.author_fee_rate) + parseFloat(offer.fee.intermediary_fee_rate)))
           })
           return arr;
         }, []);
