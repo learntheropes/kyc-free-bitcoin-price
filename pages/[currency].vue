@@ -47,7 +47,7 @@
                   <i class="mdi mdi-developer-board" />
                 </span>
                 <NuxtLink
-                  href="/api/offers/sell"
+                  :href="'/api/'+currency+'/sell'"
                   target="_blank"
                 >/api/{{ currency }}/sell</NuxtLink>
               </div>
@@ -127,7 +127,7 @@
                   <i class="mdi mdi-developer-board" />
                 </span>
                 <NuxtLink
-                  href="/api/offers/buy"
+                  :href="'/api/'+currency+'/buy'"
                   target="_blank"
                 >/api/{{ currency }}/buy</NuxtLink>
               </div>
