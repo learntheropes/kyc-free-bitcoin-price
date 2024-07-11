@@ -3,7 +3,10 @@ import { ofetch } from 'ofetch';
 export default defineEventHandler(async event => {
 
   try {
-    const response = await ofetch(`https://api.kraken.com/0/public/Ticker?pair=XBTEUR`);
+    const currency = getRouterParam(event, 'currency');
+    if (currency !== 'EUR' && currency !== 'CHF') return [];
+
+    const response = await ofetch(`https://api.kraken.com/0/public/Ticker?pair=XBT${currency}`);
     const { 
       result: { 
         XXBTZEUR: {

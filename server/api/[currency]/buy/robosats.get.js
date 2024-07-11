@@ -4,16 +4,23 @@ import minBy from 'lodash.minby';
 
 export default defineEventHandler(async event => {
   try {
-    return await fetchRoboSats();
+    const currency = getRouterParam(event, 'currency');
+    return await fetchRoboSats(currency);
   } catch (error) {
     return [];
   }
 });
 
-const fetchRoboSats = () => {
+const fetchRoboSats = (currency) => {
+
+  const currencies = getCurrencies();
+  const currencyIndex = currencies[currency];
+
   return new Promise((resolve, reject) => {
-    return tor.request('http://satstraoq35jffvkgpfoqld32nzw2siuvowanruindbfojowpwsjdgad.onion/api/book/?format=json&currency=2&type=2', function (error, res, body) {
-      if (!error) {
+    return tor.request(`http://satstraoq35jffvkgpfoqld32nzw2siuvowanruindbfojowpwsjdgad.onion/api/book/?format=json&currency=${currencyIndex}&type=2`, function (error, res, body) {
+
+      if (!error && !JSON.parse(body)['not_found']) {
+
         const methods = groupBy(JSON.parse(body), 'payment_method');
   
         const response = Object.keys(methods).reduce((arr, method) => {

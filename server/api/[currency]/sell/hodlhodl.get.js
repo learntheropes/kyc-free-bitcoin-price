@@ -5,7 +5,9 @@ import minBy from 'lodash.minby';
 export default defineEventHandler(async event => {
 
   try {
-    const { offers } = await ofetch('https://hodlhodl.com/api/v1/offers?filters[currency_code]=EUR&filters[side]=SELL&pagination[limit]=100');
+    const currency = getRouterParam(event, 'currency');
+
+    const { offers } = await ofetch(`https://hodlhodl.com/api/v1/offers?filters[currency_code]=${currency}&filters[side]=SELL&pagination[limit]=100`);
 
     let allMethods = [];
     

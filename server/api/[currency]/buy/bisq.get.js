@@ -5,13 +5,12 @@ import minBy from 'lodash.minby';
 export default defineEventHandler(async event => {
 
   try {
-    const { 
-      btc_eur: { 
-        sells 
-      }
-    } = await ofetch('https://bisq.markets/api/offers?market=BTC_EUR');
+    const currency = getRouterParam(event, 'currency');
 
-    const methods = groupBy(sells, 'payment_method');
+    const offers = await ofetch(`https://bisq.markets/api/offers?market=BTC_${currency}`);
+    const buys = offers[`btc_${currency.toLowerCase()}`].buys
+  
+    const methods = groupBy(buys, 'payment_method');
   
     return Object.keys(methods).reduce((arr, method) => {
       const offer = parseFloat(minBy(methods[method], 'price').price).toFixed(2);
@@ -22,7 +21,7 @@ export default defineEventHandler(async event => {
         site: 'https://bisq.network/',
         features: ['on-chain', 'p2p', 'open-source'],
         method: capitalize(method.split('_').join(' ')).replace('F2f', 'In Person'),
-        price: parseFloat(offer + fee).toFixed(2)
+        price: parseFloat(offer - fee).toFixed(2)
       });
   
       return arr;

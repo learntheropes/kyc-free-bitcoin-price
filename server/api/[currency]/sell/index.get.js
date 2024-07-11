@@ -10,6 +10,8 @@ export default defineEventHandler(async event => {
       }
     } = useRuntimeConfig();
 
+    const currency = getRouterParam(event, 'currency');
+
     const customOfetch = ofetch.create({
       baseURL: deploymentDomain,
       async onRequestError({ request, error }) {
@@ -20,12 +22,12 @@ export default defineEventHandler(async event => {
       },
     });
   
-    const bisqFetch = customOfetch('/api/sell/bisq');
-    const bityFetch = customOfetch('/api/sell/bity');
-    const hodlHodlFetch = customOfetch('/api/sell/hodl-hodl');
-    const roboSatsFetch = customOfetch('/api/sell/robo-sats');
-    const voucherBotFetch = customOfetch('/api/sell/voucher-bot');
-    const peachFetch = customOfetch('/api/sell/peach');
+    const bisqFetch = customOfetch(`/api/${currency}/sell/bisq`);
+    const bityFetch = customOfetch(`/api/${currency}/sell/bity`);
+    const hodlHodlFetch = customOfetch(`/api/${currency}/sell/hodlhodl`);
+    const roboSatsFetch = customOfetch(`/api/${currency}/sell/robosats`);
+    const voucherBotFetch = customOfetch(`/api/${currency}/sell/voucherbot`);
+    const peachFetch = customOfetch(`/api/${currency}/sell/peach`);
   
     const promises = [
       bityFetch, 

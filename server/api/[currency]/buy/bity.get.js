@@ -3,6 +3,7 @@ import { ofetch } from 'ofetch';
 export default defineEventHandler(async event => {
 
   try {
+    const currency = getRouterParam(event, 'currency');
     const response = await ofetch(`https://exchange.api.bity.com/v2/orders/estimate`, {
       method: 'POST',
       body: {
@@ -12,7 +13,7 @@ export default defineEventHandler(async event => {
 
         },
         output: {
-            currency: 'EUR',
+            currency,
 
         }
       }
