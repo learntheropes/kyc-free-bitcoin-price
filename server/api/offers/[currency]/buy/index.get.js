@@ -57,7 +57,7 @@ export default defineEventHandler(async event => {
       error: false
     };
   } catch (error) {
-    console.log('sell offers api error', error);
+    console.log('buy offers api error', error);
     setResponseStatus(event, 500);
     return {
       error: true,

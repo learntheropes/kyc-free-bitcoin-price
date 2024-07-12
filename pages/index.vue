@@ -8,11 +8,14 @@
     <section class="section">
       <div class="columns is-centered is-multiline is-variable is-16">
         <div class="buttons">
-          <div 
+          <NuxtLink 
             v-for="currency in currencies" 
             :key="currency" 
+            :to="'/'+currency"
             class="button"
-          ><NuxtLink :to="'/'+currency">{{ currency }}</NuxtLink></div>
+          >
+            {{ currency }}
+          </NuxtLink>
         </div>
       </div>
     </section>
