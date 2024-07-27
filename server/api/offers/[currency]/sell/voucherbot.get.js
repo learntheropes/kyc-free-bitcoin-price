@@ -19,7 +19,7 @@ export default defineEventHandler(async event => {
   
     const price =  parseFloat(exchangePrice);
   
-    return [
+    const data = [
       {
         service: 'VoucherBot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
@@ -42,8 +42,9 @@ export default defineEventHandler(async event => {
         price: parseFloat(price * 1.05)
       }
     ]
+    return { data };
   } catch (error) {
-    console.log('kraken api error', error);
-    return [];
+    console.log('voucherbot sell api error', error);
+    return { error: 'voucherbot sell', data: [] };
   }
 });

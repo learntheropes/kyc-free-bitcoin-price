@@ -38,12 +38,14 @@ export default defineEventHandler(async event => {
   
     const methods = groupBy(allMethods, 'method');
   
-    return Object.keys(methods).reduce((arr, method) => {
+    const data = Object.keys(methods).reduce((arr, method) => {
       arr.push(minBy(methods[method], 'price'))
       return arr;
     }, []);
+
+    return { data };
   } catch (error) {
-    console.log('hodlhodl api error', error);
-    return [];
+    console.log('hodl hodl buy api error', error);
+    return { error: 'hodl hodl buy', data: [] };
   }
 })

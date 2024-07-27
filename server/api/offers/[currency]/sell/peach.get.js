@@ -14,12 +14,12 @@ export default defineEventHandler(async event => {
       }
     });
 
-    let results = [];
+    let data = [];
 
     offers.forEach(offer => {
       if (offer.meansOfPayment[currency]) {
         offer.meansOfPayment[currency].forEach(method => {
-          results.push({
+          data.push({
             service: 'Peach Bitcoin',
             url: 'https://peachbitcoin.com/referral?code=PR41CA',
             features: [
@@ -33,9 +33,9 @@ export default defineEventHandler(async event => {
       }
     });
 
-    return results;
+    return { data };
   } catch (error) {
-    console.log('peach api error', error);
-    return [];
+    console.log('peachbitcoin sell api error', error);
+    return { error: 'peachbitcoin sell', data: [] };
   }
 });

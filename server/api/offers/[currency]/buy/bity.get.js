@@ -37,7 +37,7 @@ export default defineEventHandler(async event => {
   
     const price =  parseFloat(parseFloat(basePrice) - parseFloat(tradingFee) - parseFloat(nonVerifiedFee));
   
-    return [
+    const data = [
       {
         service: 'Bity',
         url: 'https://bity.com/',
@@ -52,8 +52,9 @@ export default defineEventHandler(async event => {
         price
       }
     ]
+    return { data };
   } catch (error) {
-    console.log('bity api error', error);
-    return [];
+    console.log('bity buy api error', error);
+    return { error: 'bity buy', data: [] };
   }
 });

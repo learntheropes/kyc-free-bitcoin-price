@@ -11,7 +11,7 @@ export default defineEventHandler(async event => {
     const book = await ofetch(`https://api.lnp2pbot.com/orders`);
     const offers = book.filter(offer => offer.type === 'buy' && offer.fiat_code === currency)
   
-    return offers.map(offer => {
+    const data = offers.map(offer => {
       return {
         service: 'Lnp2pbot',
         site: 'https://lnp2pbot.com/',
@@ -20,8 +20,9 @@ export default defineEventHandler(async event => {
         price: (basePrice * ( 1 - (offer.price_margin/100) - (offer.bot_fee/100) - (offer.community_fee/100)))
       }
     })
+    return { data };
   } catch (error) {
-    console.log('bisq api error', error);
-    return [];
+    console.log('lnp2pbot buy api error', error);
+    return { error: 'lnp2pbot buy', data: [] };
   }
 })

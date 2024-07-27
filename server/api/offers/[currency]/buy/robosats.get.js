@@ -20,15 +20,15 @@ const fetchRoboSats = (currency) => {
     return tor.request(`http://satstraoq35jffvkgpfoqld32nzw2siuvowanruindbfojowpwsjdgad.onion/api/book/?format=json&currency=${currencyIndex}&type=2`, function (error, res, body) {
 
       if (error) {
-        console.log('robosats api error', error);
-        reject([]);
+        console.log('robosats buy api error', error);
+        reject({ data: [], error: 'robosats buy' });
       }
       
       else if (!JSON.parse(body)['not_found']) {
 
         const methods = groupBy(JSON.parse(body), 'payment_method');
   
-        const response = Object.keys(methods).reduce((arr, method) => {
+        const data = Object.keys(methods).reduce((arr, method) => {
           const offer = parseFloat(minBy(methods[method], 'price').price);
           const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100);
       
@@ -48,10 +48,10 @@ const fetchRoboSats = (currency) => {
           return arr;
         }, []);
   
-        resolve(response);
+        resolve({ data });
       }
       else {
-        reject([]);
+        reject({ data: [], error: 'robosats buy' });
       }
     });
   });

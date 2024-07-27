@@ -12,7 +12,7 @@ export default defineEventHandler(async event => {
 
     const methods = groupBy(sells, 'payment_method');
   
-    return Object.keys(methods).reduce((arr, method) => {
+    const data = Object.keys(methods).reduce((arr, method) => {
       const offer = parseFloat(minBy(methods[method], 'price').price);
       const fee = (parseFloat(minBy(methods[method], 'price').price) * 1.15 / 100);
   
@@ -26,8 +26,9 @@ export default defineEventHandler(async event => {
   
       return arr;
     }, []);
+    return { data };
   } catch (error) {
-    console.log('bisq api error', error);
-    return [];
+    // console.log('bisq sell api error', error);
+    return { error: 'bisq sell', data: [] };
   }
 })

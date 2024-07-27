@@ -50,19 +50,29 @@ export default defineEventHandler(async event => {
       lnp2pbot
     ] = await Promise.all(promises);
   
-    const offers = sortBy([
-      ...bity,
-      ...bisq,
-      ...hodlHodl,
-      ...roboSats,
-      ...voucherBot,
-      ...peach,
-      ...lnp2pbot
+    const data = sortBy([
+      ...bity.data,
+      ...bisq.data,
+      ...hodlHodl.data,
+      ...roboSats.data,
+      ...voucherBot.data,
+      ...peach.data,
+      ...lnp2pbot.data
     ], 'price');
 
+    const errors = [
+      bity.error,
+      bisq.error,
+      hodlHodl.error,
+      roboSats.error,
+      voucherBot.error,
+      peach.error,
+      lnp2pbot.error
+    ].filter(error => error !== undefined);
+
     return { 
-      data: offers,
-      error: false
+      data,
+      errors
     };
   } catch (error) {
     console.log('sell offers api error', error);

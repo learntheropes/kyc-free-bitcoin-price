@@ -12,6 +12,8 @@
 
   let sellOffers = ref([]);
   let buyOffers = ref([]);
+  let sellErrors = ref([]);
+  let buyErrors = ref([]);
 
   onMounted(async () => {
 
@@ -30,6 +32,8 @@
 
     buyOffers.value = await sortBy(buy.data, 'price').reverse();
     sellOffers.value = await sortBy(sell.data, 'price');
+    buyErrors.value = await buy.errors;
+    sellErrors.value = await sell.errors;
 
     const { $event } = useNuxtApp();
     $event('isLoading', false);
@@ -202,6 +206,9 @@
         </div>
 
       </div>
+    </section>
+    <section v-if="buyErrors.length > 0 || sellErrors.length > 0" class="section has-text-centered">
+      Errors: {{ [...buyErrors, ...sellErrors].join(', ') }}
     </section>
   </NuxtLayout>
 </template>
