@@ -44,7 +44,7 @@
         <div class="column is-narrow block">
           <div class="columns is-centered">
             <div class="column is-narrow">
-              <h1 class="title is-4 has-text-centered">BID (Buy Offers)</h1>
+              <h1 class="title is-4 has-text-centered">{{ currency }} BID (Buy Offers)</h1>
               <div class="subtitle is-6 has-text-centered">
                 <span class="icon">
                   <i class="mdi mdi-developer-board" />
@@ -124,7 +124,7 @@
         <div class="column is-narrow block">
           <div class="columns is-centered">
             <div class="column is-narrow">
-              <h1 class="title is-4 has-text-centered">ASK (Sell Offers)</h1>
+              <h1 class="title is-4 has-text-centered">{{ currency }} ASK (Sell Offers)</h1>
               <div class="subtitle is-6 has-text-centered">
                 <span class="icon">
                   <i class="mdi mdi-developer-board" />
