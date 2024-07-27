@@ -42,10 +42,10 @@
 
 <template>
   <NuxtLayout>
-    <section v-if="buyErrors.length > 0 || sellErrors.length > 0" class="section has-text-centered">
-      Errors: {{ [...buyErrors, ...sellErrors].join(', ') }}
-    </section>
     <section class="section">
+      <div v-if="buyErrors.length > 0 || sellErrors.length > 0" class="has-text-centered">
+        Errors: {{ [...buyErrors, ...sellErrors].join(', ') }}
+      </div>
       <div class="columns is-centered is-multiline is-variable is-16">
         
         <div class="column is-narrow block">
