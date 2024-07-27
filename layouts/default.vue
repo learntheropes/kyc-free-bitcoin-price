@@ -8,7 +8,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Aggregated order book for KYC-free bitcoin trading.'
+      content: 'Aggregated order book for KYC-free bitcoin trading. GUI and API'
     },
   ],
 });
