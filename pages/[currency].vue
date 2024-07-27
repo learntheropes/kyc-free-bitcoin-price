@@ -44,7 +44,7 @@
   <NuxtLayout>
     <section class="section">
       <div v-if="buyErrors.length > 0 || sellErrors.length > 0" class="has-text-centered">
-        Errors: {{ [...buyErrors, ...sellErrors].join(', ') }}
+        Errors: {{ [...buyErrors, ...sellErrors].join(', ') }} are down.
       </div>
       <div class="columns is-centered is-multiline is-variable is-16">
         
