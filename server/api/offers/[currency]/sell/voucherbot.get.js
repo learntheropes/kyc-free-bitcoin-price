@@ -4,7 +4,7 @@ export default defineEventHandler(async event => {
 
   try {
     const currency = getRouterParam(event, 'currency');
-    if (currency !== 'EUR' && currency !== 'CHF') return [];
+    if (currency !== 'EUR' && currency !== 'CHF') return { data: [] };
 
     const response = await ofetch(`https://api.kraken.com/0/public/Ticker?pair=XBT${currency}`);
     const { 
