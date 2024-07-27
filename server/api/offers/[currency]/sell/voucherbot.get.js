@@ -45,6 +45,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     console.log('voucherbot sell api error', error);
-    return { error: 'voucherbot sell', data: [] };
+    return { error: 'voucherbot', data: [] };
   }
 });

@@ -53,6 +53,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     console.log('bity sell api error', error);
-    return { error: 'bity sell', data: [] };
+    return { error: 'bity', data: [] };
   }
 });

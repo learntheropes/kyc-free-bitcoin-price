@@ -55,6 +55,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     console.log('bity buy api error', error);
-    return { error: 'bity buy', data: [] };
+    return { error: 'bity', data: [] };
   }
 });

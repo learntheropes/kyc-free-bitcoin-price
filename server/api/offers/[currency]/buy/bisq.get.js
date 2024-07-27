@@ -30,6 +30,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     // console.log('bisq buy api error', error);
-    return { error: 'bisq buy', data: [] };
+    return { error: 'bisq', data: [] };
   }
 })

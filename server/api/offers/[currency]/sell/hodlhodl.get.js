@@ -44,6 +44,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     console.log('hodlhodl sell api error', error);
-    return { error: 'hodlhodl sell', data: [] };
+    return { error: 'hodlhodl', data: [] };
   }
 })

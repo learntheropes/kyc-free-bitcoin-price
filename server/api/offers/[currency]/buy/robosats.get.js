@@ -51,7 +51,7 @@ const fetchRoboSats = (currency) => {
         resolve({ data });
       }
       else {
-        reject({ data: [], error: 'robosats buy' });
+        reject({ data: [], error: 'robosats' });
       }
     });
   });

@@ -43,9 +43,6 @@
 <template>
   <NuxtLayout>
     <section class="section">
-      <div v-if="buyErrors.length > 0 || sellErrors.length > 0" class="has-text-centered">
-        Errors: {{ [...buyErrors, ...sellErrors].join(', ') }} are down.
-      </div>
       <div class="columns is-centered is-multiline is-variable is-16">
         
         <div class="column is-narrow block">
@@ -63,6 +60,10 @@
               </div>
             </div>
           </div>
+          <section class="error-section">
+            <div v-if="buyErrors.length === 1">Errors: {{ buyErrors.join(', ') }} is down.</div>
+            <div v-else-if="buyErrors.length > 1">Errors: {{ buyErrors.join(', ') }} are down.</div>
+          </section>
           <div class="columns is-centered is-mobile">
             <div class="column is-narrow">
               <div 
@@ -143,6 +144,10 @@
               </div>
             </div>
           </div>
+          <section class="error-section">
+            <div v-if="sellErrors.length === 1">Errors: {{ sellErrors.join(', ') }} is down.</div>
+            <div v-else-if="sellErrors.length > 1">Errors: {{ sellErrors.join(', ') }} are down.</div>
+          </section>
           <div class="columns is-centered is-mobile">
             <div class="column is-narrow">
               <div 
@@ -216,5 +221,8 @@
 <style scoped>
 .columns.is-variable.is-16 {
   --columnGap: 4rem;
+}
+.error-section {
+  padding: 1rem 0rem
 }
 </style>

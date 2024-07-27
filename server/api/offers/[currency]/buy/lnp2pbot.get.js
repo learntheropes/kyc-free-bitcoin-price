@@ -23,6 +23,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     console.log('lnp2pbot buy api error', error);
-    return { error: 'lnp2pbot buy', data: [] };
+    return { error: 'lnp2pbot', data: [] };
   }
 })

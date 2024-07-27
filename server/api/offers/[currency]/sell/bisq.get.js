@@ -28,7 +28,7 @@ export default defineEventHandler(async event => {
     }, []);
     return { data };
   } catch (error) {
-    // console.log('bisq sell api error', error);
-    return { error: 'bisq sell', data: [] };
+    console.log('bisq sell api error', error);
+    return { error: 'bisq', data: [] };
   }
 })
