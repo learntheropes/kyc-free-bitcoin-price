@@ -52,8 +52,6 @@ export default defineEventHandler(async event => {
       ...lnp2pbot
     ], 'price').reverse();
 
-    appendResponseHeader(event, "Access-Control-Allow-Origin", "*");
-
     return { 
       data: offers,
       error: false
