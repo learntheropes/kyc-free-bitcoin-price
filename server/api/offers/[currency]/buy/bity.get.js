@@ -20,8 +20,6 @@ export default defineEventHandler(async event => {
         }
       }
     });
-
-    console.log('response', response)
   
     const { 
       output: { 
