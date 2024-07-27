@@ -29,7 +29,7 @@ export default defineEventHandler(async event => {
 
     return { data };
   } catch (error) {
-    // console.log('bisq buy api error', error);
+    console.log('bisq buy api error', error);
     return { error: 'bisq', data: [] };
   }
 })
