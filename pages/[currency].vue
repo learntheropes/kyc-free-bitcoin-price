@@ -43,7 +43,7 @@
 <template>
   <NuxtLayout>
     <section class="section">
-      <div class="columns is-centered is-multiline is-variable is-16">
+      <div class="columns is-centered is-variable is-16">
         
         <div class="column is-narrow block">
           <div class="columns is-centered">
