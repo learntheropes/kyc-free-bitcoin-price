@@ -1,6 +1,6 @@
 import { ofetch } from 'ofetch';
 import groupBy from 'lodash.groupby';
-import minBy from 'lodash.minby';
+import maxBy from 'lodash.maxby';
 
 export default defineEventHandler(async event => {
 
@@ -38,7 +38,7 @@ export default defineEventHandler(async event => {
     const methods = groupBy(allMethods, 'method');
   
     const data = Object.keys(methods).reduce((arr, method) => {
-      arr.push(minBy(methods[method], 'price'))
+      arr.push(maxBy(methods[method], 'price'))
       return arr;
     }, []);
     return { data };

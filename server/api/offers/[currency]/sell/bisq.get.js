@@ -1,6 +1,6 @@
 import tor from 'tor-request';
 import groupBy from 'lodash.groupby';
-import minBy from 'lodash.minby';
+import maxBy from 'lodash.maxby';
 
 export default defineEventHandler(async event => {
   const currency = getRouterParam(event, 'currency');
@@ -18,8 +18,8 @@ export default defineEventHandler(async event => {
 
       const methods = groupBy(sells, 'payment_method');
       const data = Object.keys(methods).reduce((arr, method) => {
-        const offer = parseFloat(minBy(methods[method], 'price').price);
-        const fee = (parseFloat(minBy(methods[method], 'price').price) * 1.15 / 100);
+        const offer = parseFloat(maxBy(methods[method], 'price').price);
+        const fee = (parseFloat(maxBy(methods[method], 'price').price) * 1.15 / 100);
 
         arr.push({
           service: 'Bisq',

@@ -1,6 +1,6 @@
 import tor from 'tor-request';
 import groupBy from 'lodash.groupby';
-import minBy from 'lodash.minby';
+import maxBy from 'lodash.maxby';
 
 export default defineEventHandler(async event => {
   try {
@@ -28,8 +28,8 @@ const fetchRoboSats = (currency) => {
         const methods = groupBy(JSON.parse(body), 'payment_method');
   
         const data = Object.keys(methods).reduce((arr, method) => {
-          const offer = parseFloat(minBy(methods[method], 'price').price);
-          const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100);
+          const offer = parseFloat(maxBy(methods[method], 'price').price);
+          const fee = (parseFloat(maxBy(methods[method], 'price').price) * 0.175 / 100);
       
           method
             .split(' ')

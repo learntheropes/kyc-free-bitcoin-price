@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "lodash.groupby": "^4.6.0",
+    "lodash.maxby": "^4.6.0",
     "lodash.minby": "^4.6.0",
     "lodash.sortby": "^4.7.0",
     "mitt": "^3.0.1",
