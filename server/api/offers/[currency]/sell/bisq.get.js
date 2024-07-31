@@ -8,8 +8,8 @@ export default defineEventHandler(async event => {
   return new Promise((resolve, reject) => {
     tor.request(`http://runbtcxzz4v2haszypwbrn2baqdo7tlwt6dw7g27cwwaootd4gktwayd.onion/api/offers?market=BTC_${currency}`, function (error, res, body) {
       if (error) {
-        console.log('bisq buy api error', error);
-        reject({ data: [], error: 'bisq buy' });
+        console.log('bisq sell api error', error);
+        resolve({ data: [], error: 'bisq sell' });
         return;
       }
 

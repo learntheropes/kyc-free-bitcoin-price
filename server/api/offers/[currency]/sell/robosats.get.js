@@ -21,7 +21,7 @@ const fetchRoboSats = (currency) => {
       
       if (error) {
         console.log('robosats sell api error', error);
-        reject({ data: [], error: 'robosats' });
+        resolve({ data: [], error: 'robosats' });
       }
 
       if (!JSON.parse(body)['not_found']) {
