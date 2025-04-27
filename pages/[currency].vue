@@ -122,7 +122,7 @@
                 class="block has-text-right"
               >
                 <span>-</span>
-                <span class="has-text-primary">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100).toFixed(2) }}</span>
+                <span class="has-text-primary">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100 * -1).toFixed(2) }}</span>
                 <span>%</span>
               </div>
             </div>
