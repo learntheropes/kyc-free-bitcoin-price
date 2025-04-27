@@ -17,11 +17,11 @@ const fetchRoboSats = (currency) => {
   const currencyIndex = currencies[currency];
 
   return new Promise((resolve, reject) => {
-    return tor.request(`http://satstraoq35jffvkgpfoqld32nzw2siuvowanruindbfojowpwsjdgad.onion/api/book/?format=json&currency=${currencyIndex}&type=2`, function (error, res, body) {
+    return tor.request(`http://mmhaqzuirth5rx7gl24d4773lknltjhik57k7ahec5iefktezv4b3uid.onion/api/book/?format=json&currency=${currencyIndex}&type=2`, function (error, res, body) {
 
       if (error) {
         console.log('robosats buy api error', error);
-        resolve({ data: [], error: 'robosats buy' });
+        resolve({ data: [], error: 'robosats' });
       }
       
       else if (!JSON.parse(body)['not_found']) {

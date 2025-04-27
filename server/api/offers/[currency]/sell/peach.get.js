@@ -36,6 +36,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     console.log('peachbitcoin sell api error', error);
-    return { error: 'peachbitcoin', data: [] };
+    return { error: 'peach bitcoin', data: [] };
   }
 });

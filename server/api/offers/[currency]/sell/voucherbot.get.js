@@ -4,9 +4,8 @@ export default defineEventHandler(async event => {
 
   try {
     const currency = getRouterParam(event, 'currency');
-    if (currency !== 'EUR' && currency !== 'CHF') return { data: [] };
+    if (currency !== 'EUR') return { data: [] };
 
-    const response = await ofetch(`https://api.kraken.com/0/public/Ticker?pair=XBT${currency}`);
     const { 
       result: { 
         XXBTZEUR: {
@@ -15,27 +14,27 @@ export default defineEventHandler(async event => {
           ]
         }
       }
-    } = response;
+    } = await ofetch(`https://api.kraken.com/0/public/Ticker?pair=XBT${currency}`);
   
     const price =  parseFloat(exchangePrice);
   
     const data = [
       {
-        service: 'VoucherBot',
+        service: 'Voucher Bot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
         features: ['on-chain', 'lightning'],
         method: 'Sepa Instant',
         price: parseFloat(price * 1.025)
       },
       {
-        service: 'VoucherBot',
+        service: 'Voucher Bot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
         features: ['on-chain', 'lightning'],
         method: 'Sepa',
         price: parseFloat(price * 1.025)
       },
       {
-        service: 'VoucherBot',
+        service: 'Voucher Bot',
         url: 'https://t.me/BitcoinVoucherBot?start=345173833',
         features: ['on-chain', 'lightning'],
         method: 'Voucher',
@@ -45,6 +44,6 @@ export default defineEventHandler(async event => {
     return { data };
   } catch (error) {
     console.log('voucherbot sell api error', error);
-    return { error: 'voucherbot', data: [] };
+    return { error: 'voucher bot', data: [] };
   }
 });

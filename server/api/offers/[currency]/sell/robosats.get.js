@@ -17,7 +17,7 @@ const fetchRoboSats = (currency) => {
   const currencyIndex = currencies[currency];
 
   return new Promise((resolve, reject) => {
-    return tor.request(`http://satstraoq35jffvkgpfoqld32nzw2siuvowanruindbfojowpwsjdgad.onion/api/book/?format=json&currency=${currencyIndex}&type=1`, function (error, res, body) {
+    return tor.request(`http://mmhaqzuirth5rx7gl24d4773lknltjhik57k7ahec5iefktezv4b3uid.onion/api/book/?format=json&currency=${currencyIndex}&type=1`, function (error, res, body) {
       
       if (error) {
         console.log('robosats sell api error', error);
