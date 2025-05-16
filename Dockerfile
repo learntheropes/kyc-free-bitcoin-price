@@ -16,6 +16,10 @@ COPY . .
 # Set app environment variables
 ARG DEPLOYMENT_DOMAIN
 ENV DEPLOYMENT_DOMAIN=${DEPLOYMENT_DOMAIN}
+ARG UMAMI_ID
+ENV UMAMI_ID=${UMAMI_ID}
+ARG UMAMI_HOST
+ENV UMAMI_HOST=${UMAMI_HOST}
 
 # Install all the app npm packages
 RUN npm install
