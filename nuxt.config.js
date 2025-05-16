@@ -1,5 +1,5 @@
 const deploymentDomain = process.env.DEPLOYMENT_DOMAIN || 'http://localhost:3000';
-
+const isDeployed = process.env.NODE_ENV === 'production' && deploymentDomain !== 'http://localhost:3000';
 export default defineNuxtConfig({
 
   $production: {
@@ -80,8 +80,16 @@ export default defineNuxtConfig({
   modules: [
     // 'nuxt-simple-robots',
     // 'nuxt-simple-sitemap',
-    'nuxt-delay-hydration'
+    'nuxt-delay-hydration',
+    'nuxt-umami'
   ],
+
+  umami: {
+    enabled: (isDeployed) ? true : false,
+    id: process.env.UMAMI_ID,
+    host: process.env.UMAMI_HOST,
+    autoTrack: true,
+  },
 
   // robots: {
   //   userAgents: ['*'],
