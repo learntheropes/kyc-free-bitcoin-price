@@ -17,21 +17,21 @@ const fetchRoboSats = (currency) => {
   const currencyIndex = currencies[currency];
 
   return new Promise((resolve, reject) => {
-    return tor.request(`http://mmhaqzuirth5rx7gl24d4773lknltjhik57k7ahec5iefktezv4b3uid.onion/api/book/?format=json&currency=${currencyIndex}&type=2`, function (error, res, body) {
+    return tor.request(`http://otmoonrndnrddqdlhu6b36heunmbyw3cgvadqo2oqeau3656wfv7fwad.onion/api/book/?format=json&currency=${currencyIndex}&type=2`, function (error, res, body) {
 
       if (error) {
         console.log('robosats buy api error', error);
         resolve({ data: [], error: 'robosats' });
       }
-      
+
       else if (!JSON.parse(body)['not_found']) {
 
         const methods = groupBy(JSON.parse(body), 'payment_method');
-  
+
         const data = Object.keys(methods).reduce((arr, method) => {
           const offer = parseFloat(minBy(methods[method], 'price').price);
           const fee = (parseFloat(minBy(methods[method], 'price').price) * 0.175 / 100);
-      
+
           method
             .split(' ')
             .filter(m => m !== '&' && m !== 'Friends' && m !== 'Family' && m !== 'Monero' && m !== 'USDT' && m !== 'L-USDt' && m !== 'IT' && m !== 'it' && m !== 'It')
@@ -44,10 +44,10 @@ const fetchRoboSats = (currency) => {
                 price: parseFloat(offer + fee)
               });
             })
-          
+
           return arr;
         }, []);
-  
+
         resolve({ data });
       }
       else {
