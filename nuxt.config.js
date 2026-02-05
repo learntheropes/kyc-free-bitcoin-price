@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     torProxySecret: process.env.TOR_PROXY_SECRET,
     robosatsCoordinatorOnionUrl: process.env.ROBOSATS_COORDINATOR_ONION_URL,
-    torSocksUrl: process.env.TOR_SOCKS_URL || 'socks5h://127.0.0.1:9050',
+    torSocksUrl: 'socks5h://127.0.0.1:9050',
     public: {
       deploymentDomain
     }
