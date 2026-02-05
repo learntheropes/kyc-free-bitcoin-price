@@ -21,6 +21,10 @@ ENV UMAMI_ID=${UMAMI_ID}
 ARG UMAMI_HOST
 ENV UMAMI_HOST=${UMAMI_HOST}
 
+# Set environment variables for Tor and Robosats Coordinator
+ARG ROBOSATS_COORDINATOR_ONION_URL
+ENV ROBOSATS_COORDINATOR_ONION_URL=${ROBOSATS_COORDINATOR_ONION_URL}
+
 # Install all the app npm packages
 RUN npm install
 
@@ -31,4 +35,4 @@ RUN npm run build
 EXPOSE 8080
 
 # Start Tor and the Node application
-CMD service tor start && node .output/server/index.mjs
+CMD ["sh", "-lc", "service tor start && exec node .output/server/index.mjs"]
