@@ -2,6 +2,15 @@ const deploymentDomain = process.env.DEPLOYMENT_DOMAIN || 'http://localhost:3000
 const isDeployed = process.env.NODE_ENV === 'production' && deploymentDomain !== 'http://localhost:3000';
 export default defineNuxtConfig({
 
+  runtimeConfig: {
+    torProxySecret: process.env.TOR_PROXY_SECRET,
+    robosatsCoordinatorOnionUrl: process.env.ROBOSATS_COORDINATOR_ONION_URL,
+    torSocksUrl: process.env.TOR_SOCKS_URL || 'socks5h://127.0.0.1:9050',
+    public: {
+      deploymentDomain
+    }
+  },
+
   $production: {
     routeRules: []
   },
@@ -58,12 +67,6 @@ export default defineNuxtConfig({
         },
       ]
     },
-  },
-
-  runtimeConfig: {
-    public: {
-      deploymentDomain
-    }
   },
 
   css: [
