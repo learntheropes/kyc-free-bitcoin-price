@@ -1,38 +1,68 @@
-import tor from 'tor-request';
-import groupBy from 'lodash.groupby';
-import maxBy from 'lodash.maxby';
+import groupBy from 'lodash.groupby'
+import maxBy from 'lodash.maxby'
+import got from 'got'
+import { SocksProxyAgent } from 'socks-proxy-agent'
 
-export default defineEventHandler(async event => {
-  const currency = getRouterParam(event, 'currency');
+export default defineEventHandler(async (event) => {
+  try {
+    const currency = getRouterParam(event, 'currency')
+    return await fetchBisqSell(currency)
+  } catch (error) {
+    console.log('bisq sell api error', error?.message || error)
+    return { data: [], error: 'bisq' }
+  }
+})
 
-  return new Promise((resolve, reject) => {
-    tor.request(`http://runbtcxzz4v2haszypwbrn2baqdo7tlwt6dw7g27cwwaootd4gktwayd.onion/api/offers?market=BTC_${currency}`, function (error, res, body) {
-      if (error) {
-        console.log('bisq sell api error', error);
-        resolve({ data: [], error: 'bisq' });
-        return;
+async function fetchBisqSell(currency) {
+
+  const url = `http://runbtcxzz4v2haszypwbrn2baqdo7tlwt6dw7g27cwwaootd4gktwayd.onion/api/offers?market=BTC_${currency}`
+
+  try {
+    const agent = new SocksProxyAgent('socks5h://127.0.0.1:9050')
+
+    const res = await got(url, {
+      agent: { http: agent, https: agent },
+      timeout: { request: 20000 },
+      headers: {
+        accept: 'application/json',
+        'user-agent': 'kyc-free-bitcoin-price/1.0'
       }
+    })
 
-      const offers = JSON.parse(body);
-      const sells = offers[`btc_${currency.toLowerCase()}`].sells;
+    let offers
+    try {
+      offers = JSON.parse(res.body)
+    } catch (e) {
+      console.log('[bisq] invalid json', res.statusCode, res.headers['content-type'], String(res.body).slice(0, 200))
+      return { data: [], error: 'bisq' }
+    }
 
-      const methods = groupBy(sells, 'payment_method');
-      const data = Object.keys(methods).reduce((arr, method) => {
-        const offer = parseFloat(maxBy(methods[method], 'price').price);
-        const fee = (parseFloat(maxBy(methods[method], 'price').price) * 1.15 / 100);
+    const key = `btc_${currency.toLowerCase()}`
+    const sells = offers?.[key]?.sells
 
-        arr.push({
-          service: 'Bisq',
-          site: 'https://bisq.network/',
-          features: ['on-chain', 'p2p', 'open-source'],
-          method: capitalize(method.split('_').join(' ')).replace('F2f', 'In Person'),
-          price: parseFloat(offer + fee)
-        });
+    if (!Array.isArray(sells) || sells.length === 0) {
+      return { data: [] }
+    }
 
-        return arr;
-      }, []);
+    const methods = groupBy(sells, 'payment_method')
+    const data = Object.keys(methods).reduce((arr, method) => {
+      const offer = parseFloat(maxBy(methods[method], 'price').price)
+      const fee = offer * 1.15 / 100
 
-      resolve({ data });
-    });
-  });
-});
+      arr.push({
+        service: 'Bisq',
+        site: 'https://bisq.network/',
+        features: ['on-chain', 'p2p', 'open-source'],
+        method: capitalize(method.split('_').join(' ')).replace('F2f', 'In Person'),
+        price: parseFloat(offer + fee)
+      })
+
+      return arr
+    }, [])
+
+    return { data }
+  } catch (error) {
+    console.log('bisq sell api error', error?.message || error)
+    return { data: [], error: 'bisq' }
+  }
+}

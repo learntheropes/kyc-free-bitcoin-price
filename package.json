@@ -16,12 +16,13 @@
     "sass": "^1.68.0"
   },
   "dependencies": {
+    "got": "^14.6.6",
     "lodash.groupby": "^4.6.0",
     "lodash.maxby": "^4.6.0",
     "lodash.minby": "^4.6.0",
     "lodash.sortby": "^4.7.0",
     "mitt": "^3.0.1",
     "nuxt-umami": "^3.2.0",
-    "tor-request": "^3.1.0"
+    "socks-proxy-agent": "^8.0.5"
   }
 }
