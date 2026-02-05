@@ -27,8 +27,8 @@ async function fetchRoboSatsBuy(currency) {
       timeout: { request: 20000 },
       retry: { limit: 0 },
 
-      // IMPORTANT: RoboSats can return 404 with JSON { not_found: ... }
-      // so we must not throw on non-2xx. We'll inspect status+body ourselves.
+      // RoboSats returns 404 with JSON { not_found: ... } when no orders exist.
+      // But I guess it will change in the future https://github.com/RoboSats/robosats/issues/2416
       throwHttpErrors: false,
 
       headers: {
