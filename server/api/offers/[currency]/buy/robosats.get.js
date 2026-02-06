@@ -43,7 +43,6 @@ async function fetchRoboSatsBuy(currency) {
     try {
       json = JSON.parse(body)
     } catch (e) {
-      console.log('[robosats buy] invalid json', res.statusCode, res.headers['content-type'], String(body).slice(0, 200))
       return { data: [], error: 'robosats' }
     }
 
@@ -54,13 +53,11 @@ async function fetchRoboSatsBuy(currency) {
 
     // Any other non-2xx should be treated as a real error (coordinator down / API change)
     if (res.statusCode < 200 || res.statusCode >= 300) {
-      console.log('[robosats buy] non-2xx', res.statusCode, String(body).slice(0, 200))
       return { data: [], error: 'robosats' }
     }
 
     // Defensive: expected array of offers
     if (!Array.isArray(json)) {
-      console.log('[robosats buy] unexpected payload (not array)', String(body).slice(0, 200))
       return { data: [], error: 'robosats' }
     }
 

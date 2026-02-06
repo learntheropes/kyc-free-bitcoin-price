@@ -33,7 +33,6 @@ async function fetchBisqBuy(currency) {
     try {
       offers = JSON.parse(res.body)
     } catch (e) {
-      console.log('[bisq] invalid json', res.statusCode, res.headers['content-type'], String(res.body).slice(0, 200))
       return { data: [], error: 'bisq' }
     }
 

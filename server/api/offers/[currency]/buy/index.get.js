@@ -9,29 +9,34 @@ export default defineEventHandler(async (event) => {
     const hodlHodlFetch = $fetch(`/api/offers/${currency}/buy/hodlhodl`);
     const roboSatsFetch = $fetch(`/api/offers/${currency}/buy/robosats`);
     // const lnp2pbotFetch = $fetch(`/api/offers/${currency}/buy/lnp2pbot`);
+    const peachFetch = $fetch(`/api/offers/${currency}/buy/peach`);
 
     const promises = [
       bisqFetch,
       hodlHodlFetch,
-      roboSatsFetch
+      roboSatsFetch,
+      peachFetch
     ];
 
     const [
       bisq,
       hodlHodl,
-      roboSats
+      roboSats,
+      peach
     ] = await Promise.all(promises);
 
     const data = sortBy([
       ...bisq.data,
       ...hodlHodl.data,
-      ...roboSats.data
+      ...roboSats.data,
+      ...peach.data
     ], 'price').reverse();
 
     const errors = [
       bisq.error,
       hodlHodl.error,
-      roboSats.error
+      roboSats.error,
+      peach.error
     ].filter(error => error !== undefined);
 
     return { data, errors };
