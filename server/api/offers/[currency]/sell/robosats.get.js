@@ -43,7 +43,6 @@ async function fetchRoboSatsSell(currency) {
     try {
       json = JSON.parse(body)
     } catch (e) {
-      console.log('[robosats sell] invalid json', res.statusCode, res.headers['content-type'], String(body).slice(0, 200))
       return { data: [], error: 'robosats' }
     }
 
@@ -54,12 +53,10 @@ async function fetchRoboSatsSell(currency) {
 
     // Any other non-2xx is a real error
     if (res.statusCode < 200 || res.statusCode >= 300) {
-      console.log('[robosats sell] non-2xx', res.statusCode, String(body).slice(0, 200))
       return { data: [], error: 'robosats' }
     }
 
     if (!Array.isArray(json)) {
-      console.log('[robosats sell] unexpected payload (not array)', String(body).slice(0, 200))
       return { data: [], error: 'robosats' }
     }
 
