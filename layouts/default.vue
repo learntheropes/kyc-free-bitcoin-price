@@ -38,8 +38,8 @@ useHead({
                     <span class="icon">
                       <i class="mdi mdi-github" />
                     </span>
-                    <NuxtLink href="https://github.com/learntheropes/kyc-free-bitcoin-price" target="_blank">
-                      learntheropes/kyc-free-bitcoin-price
+                    <NuxtLink href="https://github.com/p2payto/p2pay-market" target="_blank">
+                      p2payto/p2pay-market
                     </NuxtLink>
                   </div>
 
