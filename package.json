@@ -1,13 +1,14 @@
 {
-  "name": "kyc-free-bitcoin-price",
+  "name": "@p2pay/p2pay-market",
   "version": "0.1.0",
+  "author": "Learntheropes <giovanni@learntheropes.xyz>",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
     "start": "nuxi start"
   },
-  "author": "Learntheropes <giovanni@learntheropes.xyz",
-  "license": "MIT",
   "devDependencies": {
     "@mdi/font": "^7.2.96",
     "bulma": "^0.9.4",
