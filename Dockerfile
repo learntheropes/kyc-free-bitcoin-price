@@ -22,10 +22,11 @@ ARG UMAMI_HOST
 ENV UMAMI_HOST=${UMAMI_HOST}
 
 # Set environment variables for Tor and Robosats Coordinator
-ARG TOR_PROXY_SECRET
-ENV TOR_PROXY_SECRET=${TOR_PROXY_SECRET}
 ARG ROBOSATS_COORDINATOR_ONION_URL
 ENV ROBOSATS_COORDINATOR_ONION_URL=${ROBOSATS_COORDINATOR_ONION_URL}
+# vs code complains about security for this but on Digital Ocean app I could not find any other way to espose it
+ARG TOR_PROXY_SECRET
+ENV TOR_PROXY_SECRET=${TOR_PROXY_SECRET}
 
 # Install all the app npm packages
 RUN npm install
