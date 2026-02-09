@@ -81,8 +81,6 @@ export default defineNuxtConfig({
   }],
 
   modules: [
-    // 'nuxt-simple-robots',
-    // 'nuxt-simple-sitemap',
     'nuxt-delay-hydration',
     'nuxt-umami'
   ],
@@ -93,18 +91,6 @@ export default defineNuxtConfig({
     host: process.env.UMAMI_HOST,
     autoTrack: true,
   },
-
-  // robots: {
-  //   userAgents: ['*'],
-  //   disallow: ['/cdn-cgi', ...localeCodes.map(code => `/${code}/invoice`)],
-  //   sitemap: `${deploymentDomain}/sitemap_index.xml`
-  // },
-
-  // sitemap: {
-  //   xsl: false,
-  //   autoI18n: false,
-  //   sitemapName: `sitemap_index.xml`
-  // },
 
   delayHydration: {
     mode: 'init',

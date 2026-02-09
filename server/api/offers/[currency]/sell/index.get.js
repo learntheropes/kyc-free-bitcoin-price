@@ -1,8 +1,15 @@
 import sortBy from 'lodash.sortby';
+import { testValidCurrency } from '~/server/utils/testValidCurrency'
 
 export default defineEventHandler(async (event) => {
   try {
     const currency = getRouterParam(event, 'currency');
+
+    const isSupportedCurrency = await testValidCurrency(event, currency)
+    if (!isSupportedCurrency) {
+      setResponseStatus(event, 404)
+      return { error: { statusCode: 404 } }
+    }
 
     const bisqFetch = $fetch(`/api/offers/${currency}/sell/bisq`);
     // const bityFetch = $fetch(`/api/offers/${currency}/sell/bity`);

@@ -1,50 +1,76 @@
 <script setup>
-  import sortBy from 'lodash.sortby';
+import sortBy from 'lodash.sortby';
 
-  const { 
-    params: { 
-      currency 
-    }
-  } = useRoute();
+const {
+  params: {
+    currency
+  }
+} = useRoute();
 
-  const nonDecimalsCurrencies = ['ARS', 'VES']
-  const decimals = (nonDecimalsCurrencies.includes(currency)) ? 0 : 2;
+await $fetch('/api/currencies').then((allowed) => {
+  if (!allowed.includes(currency)) {
+    throw createError({ statusCode: 404, statusMessage: 'Currency not supported' })
+  }
+})
 
-  let sellOffers = ref([]);
-  let buyOffers = ref([]);
-  let sellErrors = ref([]);
-  let buyErrors = ref([]);
+const nonDecimalsCurrencies = ['ARS', 'VES']
+const decimals = (nonDecimalsCurrencies.includes(currency)) ? 0 : 2;
 
-  onMounted(async () => {
+const { data } = await useAsyncData(`offers-${currency}`, async () => {
+  const allowed = await $fetch('/api/currencies')
 
-    const buyOffersFetch = $fetch(`/api/offers/${currency}/buy`);
-    const sellOffersFetch = $fetch(`/api/offers/${currency}/sell`);
+  if (!allowed.includes(currency)) {
+    throw createError({ statusCode: 404, statusMessage: 'Currency not supported', currency })
+  }
 
-    const promises = [
-      buyOffersFetch,
-      sellOffersFetch
-    ];
+  const [buy, sell] = await Promise.all([
+    $fetch(`/api/offers/${currency}/buy`),
+    $fetch(`/api/offers/${currency}/sell`)
+  ])
 
-    const [
-      buy,
-      sell
-    ] = await Promise.all(promises);
+  return {
+    buyOffers: sortBy(buy.data || [], 'price').reverse(),
+    sellOffers: sortBy(sell.data || [], 'price'),
+    buyErrors: buy.errors || [],
+    sellErrors: sell.errors || []
+  }
+})
 
-    buyOffers.value = await sortBy(buy.data, 'price').reverse();
-    sellOffers.value = await sortBy(sell.data, 'price');
-    buyErrors.value = await buy.errors;
-    sellErrors.value = await sell.errors;
+let sellOffers = ref([]);
+let buyOffers = ref([]);
+let sellErrors = ref([]);
+let buyErrors = ref([]);
 
-    const { $event } = useNuxtApp();
-    $event('isLoading', false);
-  });
+onMounted(async () => {
+
+  const buyOffersFetch = $fetch(`/api/offers/${currency}/buy`);
+  const sellOffersFetch = $fetch(`/api/offers/${currency}/sell`);
+
+  const promises = [
+    buyOffersFetch,
+    sellOffersFetch
+  ];
+
+  const [
+    buy,
+    sell
+  ] = await Promise.all(promises);
+
+  buyOffers.value = await sortBy(buy.data, 'price').reverse();
+  sellOffers.value = await sortBy(sell.data, 'price');
+  buyErrors.value = await buy.errors;
+  sellErrors.value = await sell.errors;
+
+  const { $event } = useNuxtApp();
+  $event('isLoading', false);
+});
 </script>
 
 <template>
   <NuxtLayout>
     <section class="section">
       <div class="columns is-centered is-variable is-16">
-        
+
         <div class="column is-narrow block">
           <div class="columns is-centered">
             <div class="column is-narrow">
@@ -53,10 +79,8 @@
                 <span class="icon">
                   <i class="mdi mdi-developer-board" />
                 </span>
-                <NuxtLink
-                  :href="'/api/offers/'+currency+'/buy'"
-                  target="_blank"
-                >/api/offers/{{ currency }}/buy</NuxtLink>
+                <NuxtLink :href="'/api/offers/' + currency + '/buy'" target="_blank">/api/offers/{{ currency }}/buy
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -66,63 +90,43 @@
           </section>
           <div class="columns is-centered is-mobile">
             <div class="column is-narrow">
-              <div 
-                v-for="(offer, index) of buyOffers" 
-                :key="index"
-                class="block"
-              >
-                <NuxtLink
-                  :href="offer.url"
-                  target="_blank"
-                >{{ offer.service }}</NuxtLink>
+              <div v-for="(offer, index) of buyOffers" :key="index" class="block">
+                <NuxtLink :href="offer.url" target="_blank">{{ offer.service }}</NuxtLink>
                 <div class="is-hidden-tablet">
                   <ServiceFeatures :offer="offer" />
                 </div>
               </div>
             </div>
             <div class="column is-narrow is-hidden-mobile">
-              <div 
-                v-for="(offer, index) of buyOffers" 
-                :key="index"
-                class="block"
-              >
+              <div v-for="(offer, index) of buyOffers" :key="index" class="block">
                 <ServiceFeatures :offer="offer" />
               </div>
             </div>
             <div class="column is-narrow">
-              <div 
-                v-for="(offer, index) of buyOffers" 
-                :key="index"
-                class="block"
-              >
+              <div v-for="(offer, index) of buyOffers" :key="index" class="block">
                 <span>{{ offer.method.replace(/\(([^\)]+)\)/, '') }}</span>
                 <div class="is-hidden-tablet">&nbsp;</div>
               </div>
             </div>
             <div class="column is-narrow">
-              <div 
-                v-for="(offer, index) of buyOffers" 
-                :key="index"
-                class="block"
-              >
-                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(decimals) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
+              <div v-for="(offer, index) of buyOffers" :key="index" class="block">
+                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(decimals) }}<span
+                    class="is-hidden-tablet">&nbsp;€</span></span>
                 <span>&nbsp;</span>
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
                   <span class="is-hidden-tablet has-text-right">-</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100).toFixed(2) }}</span>
+                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - buyOffers[0].price)
+                    / buyOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
             </div>
             <div class="column is-narrow is-hidden-mobile">
-              <div 
-                v-for="(offer, index) of buyOffers" 
-                :key="index"
-                class="block has-text-right"
-              >
+              <div v-for="(offer, index) of buyOffers" :key="index" class="block has-text-right">
                 <span>-</span>
-                <span class="has-text-primary">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100 * -1).toFixed(2) }}</span>
+                <span class="has-text-primary">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100 *
+                  -1).toFixed(2) }}</span>
                 <span>%</span>
               </div>
             </div>
@@ -137,10 +141,8 @@
                 <span class="icon">
                   <i class="mdi mdi-developer-board" />
                 </span>
-                <NuxtLink
-                  :href="'/api/offers/'+currency+'/sell'"
-                  target="_blank"
-                >/api/offers/{{ currency }}/sell</NuxtLink>
+                <NuxtLink :href="'/api/offers/' + currency + '/sell'" target="_blank">/api/offers/{{ currency }}/sell
+                </NuxtLink>
               </div>
             </div>
           </div>
@@ -150,63 +152,43 @@
           </section>
           <div class="columns is-centered is-mobile">
             <div class="column is-narrow">
-              <div 
-                v-for="(offer, index) of sellOffers" 
-                :key="index"
-                class="block"
-              >
-                <NuxtLink
-                  :href="offer.url"
-                  target="_blank"
-                >{{ offer.service }}</NuxtLink>
+              <div v-for="(offer, index) of sellOffers" :key="index" class="block">
+                <NuxtLink :href="offer.url" target="_blank">{{ offer.service }}</NuxtLink>
                 <div class="is-hidden-tablet">
                   <ServiceFeatures :offer="offer" />
                 </div>
               </div>
             </div>
             <div class="column is-narrow is-hidden-mobile">
-              <div 
-                v-for="(offer, index) of sellOffers" 
-                :key="index"
-                class="block"
-              >
+              <div v-for="(offer, index) of sellOffers" :key="index" class="block">
                 <ServiceFeatures :offer="offer" />
               </div>
             </div>
             <div class="column is-narrow">
-              <div 
-                v-for="(offer, index) of sellOffers" 
-                :key="index"
-                class="block"
-              >
+              <div v-for="(offer, index) of sellOffers" :key="index" class="block">
                 <span>{{ offer.method.replace(/\(([^\)]+)\)/, '') }}</span>
                 <div class="is-hidden-tablet">&nbsp;</div>
               </div>
             </div>
             <div class="column is-narrow">
-              <div 
-                v-for="(offer, index) of sellOffers" 
-                :key="index"
-                class="block"
-              >
-                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(decimals) }}<span class="is-hidden-tablet">&nbsp;€</span></span> 
+              <div v-for="(offer, index) of sellOffers" :key="index" class="block">
+                <span class="has-text-primary has-text-weight-bold">{{ offer.price.toFixed(decimals) }}<span
+                    class="is-hidden-tablet">&nbsp;€</span></span>
                 <span>&nbsp;</span>
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
                   <span class="is-hidden-tablet has-text-right">+</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - sellOffers[0].price) / sellOffers[0].price * 100).toFixed(2) }}</span>
+                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - sellOffers[0].price)
+                    / sellOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
             </div>
             <div class="column is-narrow is-hidden-mobile">
-              <div 
-                v-for="(offer, index) of sellOffers" 
-                :key="index"
-                class="block has-text-right"
-              >
+              <div v-for="(offer, index) of sellOffers" :key="index" class="block has-text-right">
                 <span>+</span>
-                <span class="has-text-primary">{{ ((offer.price - sellOffers[0].price) / sellOffers[0].price * 100).toFixed(2) }}</span>
+                <span class="has-text-primary">{{ ((offer.price - sellOffers[0].price) / sellOffers[0].price *
+                  100).toFixed(2) }}</span>
                 <span>%</span>
               </div>
             </div>
@@ -222,6 +204,7 @@
 .columns.is-variable.is-16 {
   --columnGap: 4rem;
 }
+
 .error-section {
   padding: 1rem 0rem
 }
