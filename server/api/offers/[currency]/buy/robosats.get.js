@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   }
 })
 
-async function fetchRoboSatsBuy(currency) {
+const fetchRoboSatsBuy = async (currency) => {
   const currencies = getCurrencies()
   const currencyIndex = currencies[currency]
 

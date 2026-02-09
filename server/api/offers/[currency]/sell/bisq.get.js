@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   }
 })
 
-async function fetchBisqSell(currency) {
+const fetchBisqSell = async (currency) => {
 
   const url = `http://runbtcxzz4v2haszypwbrn2baqdo7tlwt6dw7g27cwwaootd4gktwayd.onion/api/offers?market=BTC_${currency}`
 
