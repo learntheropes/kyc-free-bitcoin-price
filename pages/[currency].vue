@@ -116,8 +116,9 @@ onMounted(async () => {
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
                   <span class="is-hidden-tablet has-text-right">-</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - buyOffers[0].price)
-                    / buyOffers[0].price * 100).toFixed(2) }}</span>
+                  <span v-if="buyOffers.length" class="has-text-primary is-hidden-tablet has-text-right">{{
+                    ((offer.price - buyOffers[0].price)
+                      / buyOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
@@ -125,7 +126,8 @@ onMounted(async () => {
             <div class="column is-narrow is-hidden-mobile">
               <div v-for="(offer, index) of buyOffers" :key="index" class="block has-text-right">
                 <span>-</span>
-                <span class="has-text-primary">{{ ((offer.price - buyOffers[0].price) / buyOffers[0].price * 100 *
+                <span v-if="buyOffers.length" class="has-text-primary">{{ ((offer.price - buyOffers[0].price) /
+                  buyOffers[0].price * 100 *
                   -1).toFixed(2) }}</span>
                 <span>%</span>
               </div>
@@ -178,8 +180,9 @@ onMounted(async () => {
                 <span class="has-text-grey is-size-7 is-hidden-mobile">{{ currency }}/BTC</span>
                 <div class="is-hidden-tablet has-text-right">
                   <span class="is-hidden-tablet has-text-right">+</span>
-                  <span class="has-text-primary is-hidden-tablet has-text-right">{{ ((offer.price - sellOffers[0].price)
-                    / sellOffers[0].price * 100).toFixed(2) }}</span>
+                  <span v-if="sellOffers.length" class="has-text-primary is-hidden-tablet has-text-right">{{
+                    ((offer.price - sellOffers[0].price)
+                      / sellOffers[0].price * 100).toFixed(2) }}</span>
                   <span class="is-hidden-tablet has-text-right">%</span>
                 </div>
               </div>
@@ -187,7 +190,8 @@ onMounted(async () => {
             <div class="column is-narrow is-hidden-mobile">
               <div v-for="(offer, index) of sellOffers" :key="index" class="block has-text-right">
                 <span>+</span>
-                <span class="has-text-primary">{{ ((offer.price - sellOffers[0].price) / sellOffers[0].price *
+                <span v-if="sellOffers.length" class="has-text-primary">{{ ((offer.price - sellOffers[0].price) /
+                  sellOffers[0].price *
                   100).toFixed(2) }}</span>
                 <span>%</span>
               </div>
