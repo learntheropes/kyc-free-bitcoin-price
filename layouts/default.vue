@@ -38,8 +38,8 @@ useHead({
                     <span class="icon">
                       <i class="mdi mdi-github" />
                     </span>
-                    <NuxtLink href="https://github.com/p2payto/p2pay-market" target="_blank">
-                      p2payto/p2pay-market
+                    <NuxtLink href="https://github.com/p2payto/market-nuxt" target="_blank">
+                      p2payto/market-nuxt
                     </NuxtLink>
                   </div>
 
